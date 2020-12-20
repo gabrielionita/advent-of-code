@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AdventOfCode
 {
-    public abstract class DayBase
+	public abstract class DayBase
     {
         private readonly HttpClient httpClient;
         private readonly int day;
+        private string solution;
 
-        protected DayBase(HttpClient httpClient, int day)
+        protected DayBase(IHttpClientFactory httpClientFactory, int day)
         {
-            this.httpClient = httpClient;
+            httpClient = httpClientFactory.CreateClient("day-client");
             this.day = day;
         }
 
@@ -23,13 +21,26 @@ namespace AdventOfCode
             return await httpClient.GetStringAsync($"day/{day}/input");
         }
 
-        protected abstract Task<string> Solve(string input);
+        protected abstract void SolvePart1(string input);
 
-        private async Task Run()
+        protected abstract void SolvePart2(string input);
+
+        public async Task Run()
         {
             var content = await GetInput();
-            var solution = await Solve(content);
-            Console.WriteLine($"Solution: {solution}");
+            SolvePart1(content);
+            if (string.IsNullOrEmpty(solution))
+            {
+                throw new SolutionNotFoundException();
+            }
+            Console.WriteLine($"Solution for part 1: {solution}");
+
+            SolvePart2(content);
+			if (string.IsNullOrEmpty(solution))
+			{
+                throw new SolutionNotFoundException();
+			}
+            Console.WriteLine($"Solution for part 2: {solution}");
         }
     }
 }
