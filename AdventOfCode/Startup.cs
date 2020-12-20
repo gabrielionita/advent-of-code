@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using AdventOfCode.Days;
 
 namespace AdventOfCode
 {

@@ -2,23 +2,26 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace AdventOfCode
+namespace AdventOfCode.Days
 {
 	public abstract class DayBase
     {
         private readonly HttpClient httpClient;
         private readonly int day;
-        private string solution;
+        protected string solution;
 
-        protected DayBase(IHttpClientFactory httpClientFactory, int day)
+        protected DayBase(IHttpClientFactory httpClientFactory)
         {
             httpClient = httpClientFactory.CreateClient("day-client");
-            this.day = day;
+            day = int.Parse(GetType().Name[3..]);
         }
 
         protected virtual async Task<string> GetInput()
         {
-            return await httpClient.GetStringAsync($"day/{day}/input");
+
+            var response = await httpClient.GetAsync($"day/{day}/input");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
         }
 
         protected abstract void SolvePart1(string input);

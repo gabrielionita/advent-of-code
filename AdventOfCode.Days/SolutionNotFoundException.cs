@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AdventOfCode
+namespace AdventOfCode.Days
 {
 	public class SolutionNotFoundException : Exception
 	{

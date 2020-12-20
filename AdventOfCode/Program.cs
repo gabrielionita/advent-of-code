@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AdventOfCode.Days;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
@@ -15,13 +16,12 @@ namespace AdventOfCode
                 .AddJsonFile("appsettings.json", false)
                 .Build();
 
-
             var services = new ServiceCollection();
             var startup = new Startup(configuration);
             startup.ConfigureServices(services);
             var serviceProvider = services.BuildServiceProvider();
 
-            var day = serviceProvider.GetRequiredService<Day1>();
+            var day = serviceProvider.GetRequiredService<Day01>();
             await day.Run();
         }
     }

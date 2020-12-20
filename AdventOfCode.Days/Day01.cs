@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Net.Http;
 
-namespace AdventOfCode
+namespace AdventOfCode.Days
 {
-	public class Day1 : DayBase
+	public class Day01 : DayBase
 	{
-		public Day1(IHttpClientFactory httpClientFactory) : base(httpClientFactory, 1)
+		public Day01(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
 		{
 
 		}
@@ -14,8 +14,6 @@ namespace AdventOfCode
 		protected override void SolvePart1(string input)
 		{
 			var data = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
-
-			var solution = string.Empty;
 
 			for (var i = 0; i < data.Length - 1; i++)
 			{
@@ -34,8 +32,6 @@ namespace AdventOfCode
 		protected override void SolvePart2(string input)
 		{
 			var data = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
-
-			var solution = string.Empty;
 
 			for (var i = 0; i < data.Length - 2; i++)
 			{
