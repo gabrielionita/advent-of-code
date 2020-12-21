@@ -10,9 +10,14 @@ namespace AdventOfCode.Days
 		{
 		}
 
+		private int[] InitData(string input)
+		{
+			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
+		} 
+
 		public override void SolvePart1(string input)
 		{
-			var data = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
+			var data = InitData(input);
 
 			for (var i = 0; i < data.Length - 1; i++)
 			{
@@ -30,7 +35,7 @@ namespace AdventOfCode.Days
 
 		public override void SolvePart2(string input)
 		{
-			var data = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
+			var data = InitData(input);
 
 			for (var i = 0; i < data.Length - 2; i++)
 			{
