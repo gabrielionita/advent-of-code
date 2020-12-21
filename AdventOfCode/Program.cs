@@ -51,7 +51,8 @@ namespace AdventOfCode
 			{
 				throw new SolutionNotFoundException();
 			}
-			logger.LogInformation($"Solution for part 2: {day.Solution}");
+			logger.LogInformation($"Solution for part 1: {day.Solution}");
+
 			day.SolvePart2(input);
 			if (string.IsNullOrEmpty(day.Solution))
 			{
