@@ -8,11 +8,12 @@ namespace AdventOfCode.Days
 		{
 		}
 
-		protected override void SolvePart1(string input)
+		public override void SolvePart1(string input)
 		{
+			throw new System.NotImplementedException();
 		}
 
-		protected override void SolvePart2(string input)
+		public override void SolvePart2(string input)
 		{
 			throw new System.NotImplementedException();
 		}

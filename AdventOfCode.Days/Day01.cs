@@ -10,7 +10,7 @@ namespace AdventOfCode.Days
 		{
 		}
 
-		protected override void SolvePart1(string input)
+		public override void SolvePart1(string input)
 		{
 			var data = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
 
@@ -21,14 +21,14 @@ namespace AdventOfCode.Days
 					if (data[i] + data[j] == 2020)
 					{
 						var multiplication = data[i] * data[j];
-						solution = multiplication.ToString();
+						Solution = multiplication.ToString();
 						break;
 					}
 				}
 			}
 		}
 
-		protected override void SolvePart2(string input)
+		public override void SolvePart2(string input)
 		{
 			var data = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
 
@@ -41,7 +41,7 @@ namespace AdventOfCode.Days
 						if (data[i] + data[j] + data[k] == 2020)
 						{
 							var multiplication = data[i] * data[j] * data[k];
-							solution = multiplication.ToString();
+							Solution = multiplication.ToString();
 							break;
 						}
 					}

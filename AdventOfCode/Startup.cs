@@ -4,32 +4,39 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using AdventOfCode.Days;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace AdventOfCode
 {
-    class Startup
-    {
-        private readonly IConfiguration configuration;
+	public class Startup
+	{
+		private readonly IConfiguration configuration;
 
-        public Startup(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
+		public Startup(IConfiguration configuration)
+		{
+			this.configuration = configuration;
+		}
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddHttpClient(Options.DefaultName, options =>
-            {
-                options.BaseAddress = new Uri(configuration["AdventOfCodeBaseUrl"]);
-                options.DefaultRequestHeaders.Add("cookie", $"session={configuration["CookieSession"]}");
-            });
-
-            var dayTypes = typeof(DayBase).Assembly.ExportedTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract);
-
-            foreach(var type in dayTypes)
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddHttpClient(Options.DefaultName, options =>
 			{
-                services.AddTransient(type);
+				options.BaseAddress = new Uri(configuration["AdventOfCodeBaseUrl"]);
+				options.DefaultRequestHeaders.Add("cookie", $"session={configuration["CookieSession"]}");
+			});
+
+			services.AddLogging(c => c.AddConsole());
+
+			foreach (var type in GetDayTypes())
+			{
+				services.AddTransient(type);
 			}
-        }
-    }
+		}
+
+		private static IEnumerable<Type> GetDayTypes()
+		{
+			return typeof(DayBase).Assembly.ExportedTypes.Where(t => t.IsSubclassOf(typeof(DayBase)));
+		}
+	}
 }
