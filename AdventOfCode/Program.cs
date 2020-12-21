@@ -68,14 +68,14 @@ namespace AdventOfCode
 		{
 			var input = await day.GetInput();
 			day.SolvePart1(input);
-			if (string.IsNullOrEmpty(day.Solution))
+			if (day.Solution == null)
 			{
 				throw new SolutionNotFoundException();
 			}
 			logger.LogInformation($"Solution for part 1: {day.Solution}");
 
 			day.SolvePart2(input);
-			if (string.IsNullOrEmpty(day.Solution))
+			if (day.Solution == null)
 			{
 				throw new SolutionNotFoundException();
 			}

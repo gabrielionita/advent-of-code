@@ -8,7 +8,7 @@ namespace AdventOfCode.Days
 		private readonly HttpClient httpClient;
 		private readonly int day;
 
-		public string Solution { get; protected set; }
+		public object Solution { get; protected set; }
 
 		protected DayBase(HttpClient httpClient)
 		{

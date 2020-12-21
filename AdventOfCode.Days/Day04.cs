@@ -34,7 +34,7 @@ namespace AdventOfCode.Days
 				}
 
 			}
-			Solution = validPassports.ToString();
+			Solution = validPassports;
 		}
 
 		public override void SolvePart2(string input)
@@ -103,7 +103,7 @@ namespace AdventOfCode.Days
 				}
 
 			}
-			Solution = validPassports.ToString();
+			Solution = validPassports;
 		}
 	}
 }

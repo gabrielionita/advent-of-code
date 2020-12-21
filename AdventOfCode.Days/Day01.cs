@@ -26,7 +26,7 @@ namespace AdventOfCode.Days
 					if (data[i] + data[j] == 2020)
 					{
 						var multiplication = data[i] * data[j];
-						Solution = multiplication.ToString();
+						Solution = multiplication;
 						break;
 					}
 				}
@@ -46,7 +46,7 @@ namespace AdventOfCode.Days
 						if (data[i] + data[j] + data[k] == 2020)
 						{
 							var multiplication = data[i] * data[j] * data[k];
-							Solution = multiplication.ToString();
+							Solution = multiplication;
 							break;
 						}
 					}

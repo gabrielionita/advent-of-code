@@ -30,7 +30,7 @@ namespace AdventOfCode.Days
 				}
 			}
 
-			Solution = validPasswords.ToString();
+			Solution = validPasswords;
 		}
 
 		public override void SolvePart2(string input)
@@ -52,7 +52,7 @@ namespace AdventOfCode.Days
 				}
 			}
 
-			Solution = validPasswords.ToString();
+			Solution = validPasswords;
 		}
 	}
 }

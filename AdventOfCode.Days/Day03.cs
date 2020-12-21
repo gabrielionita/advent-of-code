@@ -25,7 +25,7 @@ namespace AdventOfCode.Days
 		{
 			var map = InitData(input);
 			var treesEncountered = Slope(map, 3, 1);
-			Solution = treesEncountered.ToString();
+			Solution = treesEncountered;
 		}
 
 		private long Slope(bool[][] map, int right, int down)
@@ -51,7 +51,7 @@ namespace AdventOfCode.Days
 		{
 			var map = InitData(input);
 			var treesEncounteder = Slope(map, 1, 1) * Slope(map, 3, 1) * Slope(map, 5, 1) * Slope(map, 7, 1) * Slope(map, 1, 2);
-			Solution = treesEncounteder.ToString();
+			Solution = treesEncounteder;
 		}
 	}
 }
