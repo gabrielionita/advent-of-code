@@ -1,10 +1,11 @@
-﻿using AdventOfCode.Days;
+﻿using AdventOfCode.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace AdventOfCode
@@ -20,8 +21,7 @@ namespace AdventOfCode
 
 			try
 			{
-				var day = GetDay(args);
-				await Run(logger, day);
+				await GetDay(args).Run();
 			}
 			catch (Exception exception)
 			{
@@ -43,13 +43,13 @@ namespace AdventOfCode
 			logger = serviceProvider.GetRequiredService<ILogger<Program>>();
 		}
 
-		private static DayBase GetDay(string[] args)
+		private static IRunnable GetDay(string[] args)
 		{
 			Type dayType;
 			if (args[0] == "--latest-day")
 			{
-				dayType = typeof(DayBase).Assembly.GetTypes()
-					.Where(type => type.Name != nameof(DayBase) && type.Name.StartsWith("Day")).OrderByDescending(type => type.Name)
+				dayType = Assembly.Load("AdventOfCode.Days").ExportedTypes
+					.Where(type => !type.IsAbstract && type.Name.StartsWith("Day")).OrderByDescending(type => type.Name)
 					.First();
 			}
 			else if (args[0] == "--day" && int.TryParse(args[1], out var number))
@@ -61,25 +61,7 @@ namespace AdventOfCode
 				throw new ArgumentException("Args are not specified");
 			}
 			logger.LogInformation($"Running {dayType.Name}");
-			return (DayBase)serviceProvider.GetRequiredService(dayType);
-		}
-
-		private static async Task Run(ILogger logger, DayBase day)
-		{
-			var input = await day.GetInput();
-			day.SolvePart1(input);
-			if (day.Solution == null)
-			{
-				throw new SolutionNotFoundException();
-			}
-			logger.LogInformation($"Solution for part 1: {day.Solution}");
-
-			day.SolvePart2(input);
-			if (day.Solution == null)
-			{
-				throw new SolutionNotFoundException();
-			}
-			logger.LogInformation($"Solution for part 2: {day.Solution}");
+			return (IRunnable)serviceProvider.GetRequiredService(dayType);
 		}
 	}
 }

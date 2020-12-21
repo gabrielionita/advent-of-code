@@ -1,24 +1,24 @@
-﻿using System;
+﻿using AdventOfCode.Abstractions;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day01 : DayBase
+	public class Day01 : DayBase<int[]>
 	{
-		public Day01(HttpClient httpClient) : base(httpClient)
+		public Day01(HttpClient httpClient, ILogger<Day01> logger) : base(httpClient, logger)
 		{
 		}
 
-		private int[] InitData(string input)
+		protected override int[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
-		} 
+		}
 
-		public override void SolvePart1(string input)
+		protected override void SolvePart1(int[] data)
 		{
-			var data = InitData(input);
-
 			for (var i = 0; i < data.Length - 1; i++)
 			{
 				for (var j = i; j < data.Length; j++)
@@ -33,10 +33,8 @@ namespace AdventOfCode.Days
 			}
 		}
 
-		public override void SolvePart2(string input)
+		protected override void SolvePart2(int[] data)
 		{
-			var data = InitData(input);
-
 			for (var i = 0; i < data.Length - 2; i++)
 			{
 				for (var j = i + 1; j < data.Length - 1; j++)

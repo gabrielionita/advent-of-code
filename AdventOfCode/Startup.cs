@@ -3,9 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
-using AdventOfCode.Days;
+using AdventOfCode.Abstractions;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace AdventOfCode
 {
@@ -34,9 +35,10 @@ namespace AdventOfCode
 			}
 		}
 
-		private static IEnumerable<Type> GetDayTypes()
+		private IEnumerable<Type> GetDayTypes()
 		{
-			return typeof(DayBase).Assembly.ExportedTypes.Where(t => t.IsSubclassOf(typeof(DayBase)));
+			return Assembly.Load("AdventOfCode.Days").ExportedTypes.Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface && t.BaseType != null &&
+				t.BaseType.IsGenericType && t.BaseType.GetGenericTypeDefinition() == typeof(DayBase<>)) ;
 		}
 	}
 }

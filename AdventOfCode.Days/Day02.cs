@@ -1,18 +1,24 @@
-﻿using System;
+﻿using AdventOfCode.Abstractions;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day02 : DayBase
+	public class Day02 : DayBase<string[]>
 	{
-		public Day02(HttpClient httpClient) : base(httpClient)
+		public Day02(HttpClient httpClient, ILogger<Day02> logger) : base(httpClient, logger)
 		{
 		}
 
-		public override void SolvePart1(string input)
+		protected override string[] MapInput(string input)
 		{
-			var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+		}
+
+		protected override void SolvePart1(string[] lines)
+		{
 			var validPasswords = 0;
 			foreach(var line in lines)
 			{
@@ -33,9 +39,8 @@ namespace AdventOfCode.Days
 			Solution = validPasswords;
 		}
 
-		public override void SolvePart2(string input)
+		protected override void SolvePart2(string[] lines)
 		{
-			var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 			var validPasswords = 0;
 			foreach (var line in lines)
 			{

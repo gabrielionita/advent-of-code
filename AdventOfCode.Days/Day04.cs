@@ -1,29 +1,30 @@
-﻿using System;
+﻿using AdventOfCode.Abstractions;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day04 : DayBase
+	public class Day04 : DayBase<IEnumerable<Dictionary<string, string>>>
 	{
 		private readonly string[] mandatoryKeys = new[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" };
 		private readonly string[] eyeColors = new[] { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
 
-		public Day04(HttpClient httpClient) : base(httpClient)
+		public Day04(HttpClient httpClient, ILogger<Day04> logger) : base(httpClient, logger)
 		{
 		}
 
-		private IEnumerable<Dictionary<string, string>> InitData(string input)
+		protected override IEnumerable<Dictionary<string, string>> MapInput(string input)
 		{
 			return input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries)
 				.Select(c => c.Split(new[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries)
 						.ToDictionary(key => key.Split(":")[0], value => value.Split(":")[1]));
 		}
 
-		public override void SolvePart1(string input)
+		protected override void SolvePart1(IEnumerable<Dictionary<string, string>> passports)
 		{
-			var passports = InitData(input);
 			var validPassports = 0;
 			foreach (var passport in passports)
 			{
@@ -37,9 +38,8 @@ namespace AdventOfCode.Days
 			Solution = validPassports;
 		}
 
-		public override void SolvePart2(string input)
+		protected override void SolvePart2(IEnumerable<Dictionary<string, string>> passports)
 		{
-			var passports = InitData(input);
 			var validPassports = 0;
 			foreach (var passport in passports)
 			{

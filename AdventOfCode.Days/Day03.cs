@@ -1,15 +1,17 @@
-﻿using System.Linq;
+﻿using AdventOfCode.Abstractions;
+using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day03 : DayBase
+	public class Day03 : DayBase<bool[][]>
 	{
-		public Day03(HttpClient httpClient) : base(httpClient)
+		public Day03(HttpClient httpClient, ILogger<Day03> logger) : base(httpClient, logger)
 		{
 		}
 
-		private bool[][] InitData(string input)
+		protected override bool[][] MapInput(string input)
 		{
 			var lines = input.Split('\n', System.StringSplitOptions.RemoveEmptyEntries).ToArray();
 			var map = new bool[lines.Length][];
@@ -21,20 +23,13 @@ namespace AdventOfCode.Days
 			return map;
 		}
 
-		public override void SolvePart1(string input)
-		{
-			var map = InitData(input);
-			var treesEncountered = Slope(map, 3, 1);
-			Solution = treesEncountered;
-		}
-
 		private long Slope(bool[][] map, int right, int down)
 		{
 			var treesEncountered = 0;
 			var i = 0;
 			var j = 0;
 			var columns = map[0].Length;
-			while (i <  map.Length)
+			while (i < map.Length)
 			{
 				if (map[i][j])
 				{
@@ -47,9 +42,14 @@ namespace AdventOfCode.Days
 			return treesEncountered;
 		}
 
-		public override void SolvePart2(string input)
+		protected override void SolvePart1(bool[][] map)
 		{
-			var map = InitData(input);
+			var treesEncountered = Slope(map, 3, 1);
+			Solution = treesEncountered;
+		}
+
+		protected override void SolvePart2(bool[][] map)
+		{
 			var treesEncounteder = Slope(map, 1, 1) * Slope(map, 3, 1) * Slope(map, 5, 1) * Slope(map, 7, 1) * Slope(map, 1, 2);
 			Solution = treesEncounteder;
 		}
