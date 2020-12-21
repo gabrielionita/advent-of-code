@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode.Days
 {
-	public abstract class DayBase
+	public abstract class DayBase 
 	{
 		private readonly HttpClient httpClient;
 		private readonly int day;

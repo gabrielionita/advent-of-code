@@ -26,7 +26,7 @@ namespace AdventOfCode
 				options.DefaultRequestHeaders.Add("cookie", $"session={configuration["CookieSession"]}");
 			});
 
-			services.AddLogging(c => c.AddConsole());
+			services.AddLogging(c => c.AddConsole().AddDebug());
 
 			foreach (var type in GetDayTypes())
 			{
