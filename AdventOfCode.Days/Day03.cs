@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day03 : DayBase<bool[][]>
+	public class Day03 : DayBase<bool[][], int>
 	{
 		public Day03(HttpClient httpClient, ILogger<Day03> logger) : base(httpClient, logger)
 		{
@@ -23,7 +23,7 @@ namespace AdventOfCode.Days
 			return map;
 		}
 
-		private long Slope(bool[][] map, int right, int down)
+		private int Slope(bool[][] map, int right, int down)
 		{
 			var treesEncountered = 0;
 			var i = 0;
@@ -42,16 +42,14 @@ namespace AdventOfCode.Days
 			return treesEncountered;
 		}
 
-		protected override void SolvePart1(bool[][] map)
+		protected override int SolvePart1(bool[][] map)
 		{
-			var treesEncountered = Slope(map, 3, 1);
-			Solution = treesEncountered;
+			return Slope(map, 3, 1);
 		}
 
-		protected override void SolvePart2(bool[][] map)
+		protected override int SolvePart2(bool[][] map)
 		{
-			var treesEncounteder = Slope(map, 1, 1) * Slope(map, 3, 1) * Slope(map, 5, 1) * Slope(map, 7, 1) * Slope(map, 1, 2);
-			Solution = treesEncounteder;
+			return Slope(map, 1, 1) * Slope(map, 3, 1) * Slope(map, 5, 1) * Slope(map, 7, 1) * Slope(map, 1, 2);
 		}
 	}
 }

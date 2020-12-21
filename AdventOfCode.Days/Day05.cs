@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day05 : DayBase<string[]>
+	public class Day05 : DayBase<string[], int>
 	{
 		public Day05(HttpClient httpClient, ILogger<Day05> logger) : base(httpClient, logger)
 		{
@@ -54,7 +54,7 @@ namespace AdventOfCode.Days
 			return colMin;
 		}
 
-		protected override void SolvePart1(string[] codes)
+		protected override int SolvePart1(string[] codes)
 		{
 			var maxSeatId = 0;
 			foreach (var code in codes)
@@ -68,10 +68,10 @@ namespace AdventOfCode.Days
 				}
 			}
 
-			Solution = maxSeatId;
+			return maxSeatId;
 		}
 
-		protected override void SolvePart2(string[] codes)
+		protected override int SolvePart2(string[] codes)
 		{
 			var ids = new int[128, 8];
 			foreach (var code in codes)
@@ -89,12 +89,13 @@ namespace AdventOfCode.Days
 				if(previousId != 0 && currentId == 0 && nextId != 0)
 				{
 					currentId = (previousId + nextId) / 2;
-					Solution = currentId;
 					break;
 				}
 				previousId = currentId;
 				currentId = nextId;
 			}
+
+			return currentId;
 		}
 	}
 }

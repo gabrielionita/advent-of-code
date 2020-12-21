@@ -6,7 +6,7 @@ using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day01 : DayBase<int[]>
+	public class Day01 : DayBase<int[], int>
 	{
 		public Day01(HttpClient httpClient, ILogger<Day01> logger) : base(httpClient, logger)
 		{
@@ -17,24 +17,26 @@ namespace AdventOfCode.Days
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
 		}
 
-		protected override void SolvePart1(int[] data)
+		protected override int SolvePart1(int[] data)
 		{
+			var multiplication = 0;
 			for (var i = 0; i < data.Length - 1; i++)
 			{
 				for (var j = i; j < data.Length; j++)
 				{
 					if (data[i] + data[j] == 2020)
 					{
-						var multiplication = data[i] * data[j];
-						Solution = multiplication;
+						multiplication = data[i] * data[j];
 						break;
 					}
 				}
 			}
+			return multiplication;
 		}
 
-		protected override void SolvePart2(int[] data)
+		protected override int SolvePart2(int[] data)
 		{
+			var multiplication = 0;
 			for (var i = 0; i < data.Length - 2; i++)
 			{
 				for (var j = i + 1; j < data.Length - 1; j++)
@@ -43,13 +45,13 @@ namespace AdventOfCode.Days
 					{
 						if (data[i] + data[j] + data[k] == 2020)
 						{
-							var multiplication = data[i] * data[j] * data[k];
-							Solution = multiplication;
+							multiplication = data[i] * data[j] * data[k];
 							break;
 						}
 					}
 				}
 			}
+			return multiplication;
 		}
 	}
 }

@@ -7,7 +7,7 @@ using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day04 : DayBase<IEnumerable<Dictionary<string, string>>>
+	public class Day04 : DayBase<IEnumerable<Dictionary<string, string>>, int>
 	{
 		private readonly string[] mandatoryKeys = new[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" };
 		private readonly string[] eyeColors = new[] { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
@@ -23,7 +23,7 @@ namespace AdventOfCode.Days
 						.ToDictionary(key => key.Split(":")[0], value => value.Split(":")[1]));
 		}
 
-		protected override void SolvePart1(IEnumerable<Dictionary<string, string>> passports)
+		protected override int SolvePart1(IEnumerable<Dictionary<string, string>> passports)
 		{
 			var validPassports = 0;
 			foreach (var passport in passports)
@@ -35,10 +35,10 @@ namespace AdventOfCode.Days
 				}
 
 			}
-			Solution = validPassports;
+			return validPassports;
 		}
 
-		protected override void SolvePart2(IEnumerable<Dictionary<string, string>> passports)
+		protected override int SolvePart2(IEnumerable<Dictionary<string, string>> passports)
 		{
 			var validPassports = 0;
 			foreach (var passport in passports)
@@ -103,7 +103,7 @@ namespace AdventOfCode.Days
 				}
 
 			}
-			Solution = validPassports;
+			return validPassports;
 		}
 	}
 }

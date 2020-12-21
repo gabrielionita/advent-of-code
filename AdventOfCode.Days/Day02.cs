@@ -6,7 +6,7 @@ using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-	public class Day02 : DayBase<string[]>
+	public class Day02 : DayBase<string[], int>
 	{
 		public Day02(HttpClient httpClient, ILogger<Day02> logger) : base(httpClient, logger)
 		{
@@ -17,7 +17,7 @@ namespace AdventOfCode.Days
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 		}
 
-		protected override void SolvePart1(string[] lines)
+		protected override int SolvePart1(string[] lines)
 		{
 			var validPasswords = 0;
 			foreach(var line in lines)
@@ -36,10 +36,10 @@ namespace AdventOfCode.Days
 				}
 			}
 
-			Solution = validPasswords;
+			return validPasswords;
 		}
 
-		protected override void SolvePart2(string[] lines)
+		protected override int SolvePart2(string[] lines)
 		{
 			var validPasswords = 0;
 			foreach (var line in lines)
@@ -57,7 +57,7 @@ namespace AdventOfCode.Days
 				}
 			}
 
-			Solution = validPasswords;
+			return validPasswords;
 		}
 	}
 }
