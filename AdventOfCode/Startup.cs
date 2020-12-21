@@ -37,8 +37,8 @@ namespace AdventOfCode
 
 		private IEnumerable<Type> GetDayTypes()
 		{
-			return Assembly.Load("AdventOfCode.Days").ExportedTypes.Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface && t.BaseType != null &&
-				t.BaseType.IsGenericType && t.BaseType.GetGenericTypeDefinition() == typeof(DayBase<,>)) ;
+			return Assembly.Load("AdventOfCode.Days").ExportedTypes
+				.Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface && t.IsAssignableTo(typeof(IRunnable)));
 		}
 	}
 }
