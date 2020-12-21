@@ -6,9 +6,8 @@ namespace AdventOfCode.Days
 {
 	public class Day01 : DayBase
 	{
-		public Day01(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+		public Day01(HttpClient httpClient) : base(httpClient)
 		{
-
 		}
 
 		protected override void SolvePart1(string input)

@@ -10,9 +10,9 @@ namespace AdventOfCode.Days
         private readonly int day;
         protected string solution;
 
-        protected DayBase(IHttpClientFactory httpClientFactory)
+        protected DayBase(HttpClient httpClient)
         {
-            httpClient = httpClientFactory.CreateClient("day-client");
+            this.httpClient = httpClient;
             day = int.Parse(GetType().Name[3..]);
         }
 

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdventOfCode
@@ -21,8 +22,19 @@ namespace AdventOfCode
             startup.ConfigureServices(services);
             var serviceProvider = services.BuildServiceProvider();
 
-            var day = serviceProvider.GetRequiredService<Day01>();
-            await day.Run();
+            var newestDayType = typeof(DayBase).Assembly.GetTypes()
+                .Where(type => type.Name != nameof(DayBase) && type.Name.StartsWith("Day")).OrderByDescending(type => type.Name)
+                .First();
+            var day = (DayBase)serviceProvider.GetRequiredService(newestDayType);
+            Console.WriteLine($"Running {newestDayType.Name}");
+            try
+            {
+                await day.Run();
+            }
+            catch (Exception exception)
+			{
+                Console.Error.WriteLine(exception.Message);
+			}
         }
     }
 }

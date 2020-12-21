@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using AdventOfCode.Days;
@@ -17,17 +18,17 @@ namespace AdventOfCode
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient("day-client", options =>
+            services.AddHttpClient(Options.DefaultName, options =>
             {
                 options.BaseAddress = new Uri(configuration["AdventOfCodeBaseUrl"]);
                 options.DefaultRequestHeaders.Add("cookie", $"session={configuration["CookieSession"]}");
             });
 
-            var dayClasses = typeof(DayBase).Assembly.ExportedTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract);
+            var dayTypes = typeof(DayBase).Assembly.ExportedTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract);
 
-            foreach(var dayClass in dayClasses)
+            foreach(var type in dayTypes)
 			{
-                services.AddTransient(dayClass);
+                services.AddTransient(type);
 			}
         }
     }
