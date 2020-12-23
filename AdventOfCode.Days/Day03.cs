@@ -35,7 +35,7 @@ namespace AdventOfCode.Days
 				{
 					treesEncountered++;
 				}
-				i = i + down;
+				i += down;
 				j = (j + right) % columns;
 			}
 

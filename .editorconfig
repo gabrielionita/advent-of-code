@@ -1,0 +1,6 @@
+﻿[*.cs]
+# IDE0057: Use range operator
+csharp_style_prefer_range_operator = false:suggestion
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = silent

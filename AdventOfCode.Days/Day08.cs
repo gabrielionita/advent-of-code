@@ -7,10 +7,12 @@ using System.Net.Http;
 
 namespace AdventOfCode.Days
 {
-
-
 	public class Day08 : DayBase<List<Instruction>, int>
 	{
+		private const string nopInstruction = "nop";
+		private const string accInstruction = "acc";
+		private const string jmpInstruction = "jmp";
+
 		public Day08(HttpClient httpClient, ILogger<Day08> logger) : base(httpClient, logger)
 		{
 		}
@@ -31,13 +33,13 @@ namespace AdventOfCode.Days
 			var linesChanged = new List<int>();
 			while (true)
 			{
-				var lineNumber = RunCode(code, true, linesChanged, true);
+				var lineNumber = RunCode(code, true, linesChanged);
 				var instruction = code[lineNumber];
 				linesChanged.Add(lineNumber);
 				SwitchCode(instruction);
 				try
 				{
-					return RunCode(code, throwIfLoop: true);
+					return RunCode(code, true);
 				}
 				catch(StackOverflowException)
 				{
@@ -48,17 +50,17 @@ namespace AdventOfCode.Days
 
 		private void SwitchCode(Instruction instruction)
 		{
-			if (instruction.Code == "nop")
+			if (instruction.Code == nopInstruction)
 			{
-				instruction.Code = "jmp";
+				instruction.Code = jmpInstruction;
 			}
-			else if (instruction.Code == "jmp")
+			else if (instruction.Code == jmpInstruction)
 			{
-				instruction.Code = "nop";
+				instruction.Code = nopInstruction;
 			}
 		}
 
-		private int RunCode(List<Instruction> code, bool returnIfNopOrJmp = false, List<int> linesChanged = null, bool throwIfLoop = false)
+		private int RunCode(List<Instruction> code, bool throwIfLoop = false, List<int> linesChanged = null)
 		{
 			code.ForEach(instruction => instruction.Executed = false);
 			var accumulator = 0;
@@ -66,21 +68,21 @@ namespace AdventOfCode.Days
 			var instruction = code[lineNumber];
 			while (!instruction.Executed)
 			{
-				if((instruction.Code == "jmp" || instruction.Code == "nop") && returnIfNopOrJmp && !linesChanged.Contains(lineNumber))
+				if ((instruction.Code == jmpInstruction || instruction.Code == nopInstruction) && linesChanged != null && !linesChanged.Contains(lineNumber))
 				{
 					return lineNumber;
 				}
 
-				if (instruction.Code == "acc")
+				if (instruction.Code == accInstruction)
 				{
 					accumulator += instruction.Argument;
 					lineNumber++;
 				}
-				else if (instruction.Code == "jmp")
+				else if (instruction.Code == jmpInstruction)
 				{
 					lineNumber += instruction.Argument;
 				}
-				else if (instruction.Code == "nop")
+				else if (instruction.Code == nopInstruction)
 				{
 					lineNumber++;
 				}
