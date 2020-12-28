@@ -45,23 +45,23 @@ namespace AdventOfCode
 
 		private static IRunnable GetDay(string[] args)
 		{
-			Type dayType;
-			if (args[0] == "--latest-day")
-			{
-				dayType = Assembly.Load("AdventOfCode.Days").ExportedTypes
-					.Where(type => !type.IsAbstract && type.Name.StartsWith("Day")).OrderByDescending(type => type.Name)
-					.First();
-			}
-			else if (args[0] == "--day" && int.TryParse(args[1], out var number))
-			{
-				dayType = Type.GetType($"AdventOfCode.Days.Day{number:00}, AdventOfCode.Days", true);
-			}
-			else
-			{
-				throw new ArgumentException("Args are not specified");
-			}
-			logger.LogInformation($"Running {dayType.Name}");
-			return (IRunnable)serviceProvider.GetRequiredService(dayType);
-		}
+            Type dayType;
+            if (!args.Any())
+            {
+                dayType = Assembly.Load("AdventOfCode.Days").ExportedTypes
+                    .Where(type => !type.IsAbstract && type.Name.StartsWith("Day")).OrderByDescending(type => type.Name)
+                    .First();
+            }
+            else if (args[0] == "--year" && int.TryParse(args[1], out var year) && args[2] == "--day" && int.TryParse(args[3], out var number))
+            {
+                dayType = Type.GetType($"AdventOfCode.Days{year}.Day{number:00}, AdventOfCode.Days", true);
+            }
+            else
+            {
+                throw new ArgumentException($"Specified arguments are invalid: {string.Join(", ", args)}", nameof(args));
+            }
+            logger.LogInformation($"Running {dayType.Name}");
+            return (IRunnable)serviceProvider.GetRequiredService(dayType);
+        }
 	}
 }

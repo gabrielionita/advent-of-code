@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Days2020
 {
 	public class Day05 : DayBase<string[], int>
 	{

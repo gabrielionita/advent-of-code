@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Days2020
 {
 	public class Day07 : DayBase<Dictionary<string, Dictionary<string, int>>, int>
 	{

@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Days2020
 {
 	public class Day02 : DayBase<string[], int>
 	{
