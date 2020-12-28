@@ -1,5 +1,4 @@
-﻿using AdventOfCode.Abstractions;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,39 +11,58 @@ namespace AdventOfCode
 {
     public class Program
     {
-		private static ILogger logger;
-		private static IServiceProvider serviceProvider;
-
         public static async Task Main(string[] args)
-		{
-			Init();
+        {
+            var serviceProvider = BuildServiceProvider();
+            var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
 
-			try
-			{
-				await GetDay(args).Run();
-			}
-			catch (Exception exception)
-			{
-				logger.LogError(exception, "Error");
-			}
-		}
+            try
+            {
+                var dayType = GetDayType(args);
+                logger.LogInformation($"Running {dayType.Name}");
+                var instance = serviceProvider.GetRequiredService(dayType);
+                var content = await ((Task<string>)dayType.GetMethod("GetStringContent")
+                    .Invoke(instance, null))
+                    .ConfigureAwait(false);
 
-		private static void Init()
-		{
-			var configuration = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-				.AddJsonFile("appsettings.json", false)
-				.Build();
+                var input = dayType.GetMethod("MapInput").Invoke(instance, new[] { content });
+                var solveMethod = dayType.GetMethod("SolvePart1");
+                var defaultSolution = Activator.CreateInstance(solveMethod.ReturnType);
+                var solution = solveMethod.Invoke(instance, new[] { input });
+                if (solution.Equals(defaultSolution))
+                {
+                    throw new Exception("No solution was found");
+                }
+                logger.LogInformation($"Solution for part 1: {solution}");
 
-			var services = new ServiceCollection();
-			var startup = new Startup(configuration);
-			startup.ConfigureServices(services);
-			serviceProvider = services.BuildServiceProvider();
-			logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-		}
+                solution = dayType.GetMethod("SolvePart2").Invoke(instance, new[] { input });
+                if (solution.Equals(defaultSolution))
+                {
+                    throw new Exception("No solution was found");
+                }
+                logger.LogInformation($"Solution for part 2: {solution}");
+            }
+            catch (Exception exception)
+            {
+                logger.LogError(exception, "Error");
+            }
+        }
 
-		private static IRunnable GetDay(string[] args)
-		{
+        private static IServiceProvider BuildServiceProvider()
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+                .AddJsonFile("appsettings.json", false)
+                .Build();
+
+            var services = new ServiceCollection();
+            var startup = new Startup(configuration);
+            startup.ConfigureServices(services);
+            return services.BuildServiceProvider();
+        }
+
+        private static Type GetDayType(string[] args)
+        {
             Type dayType;
             if (!args.Any())
             {
@@ -60,8 +78,7 @@ namespace AdventOfCode
             {
                 throw new ArgumentException($"Specified arguments are invalid: {string.Join(", ", args)}", nameof(args));
             }
-            logger.LogInformation($"Running {dayType.Name}");
-            return (IRunnable)serviceProvider.GetRequiredService(dayType);
+            return dayType;
         }
-	}
+    }
 }

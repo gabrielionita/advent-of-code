@@ -1,5 +1,4 @@
 ﻿using AdventOfCode.Abstractions;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Net.Http;
 
@@ -7,11 +6,11 @@ namespace AdventOfCode.Days2020
 {
 	public class Day03 : DayBase<bool[][], int>
 	{
-		public Day03(HttpClient httpClient, ILogger<Day03> logger) : base(httpClient, logger)
+		public Day03(HttpClient httpClient) : base(httpClient)
 		{
 		}
 
-		protected override bool[][] MapInput(string input)
+        public override bool[][] MapInput(string input)
 		{
 			var lines = input.Split('\n', System.StringSplitOptions.RemoveEmptyEntries).ToArray();
 			var map = new bool[lines.Length][];
@@ -23,7 +22,7 @@ namespace AdventOfCode.Days2020
 			return map;
 		}
 
-		private int Slope(bool[][] map, int right, int down)
+        public int Slope(bool[][] map, int right, int down)
 		{
 			var treesEncountered = 0;
 			var i = 0;
@@ -42,12 +41,12 @@ namespace AdventOfCode.Days2020
 			return treesEncountered;
 		}
 
-		protected override int SolvePart1(bool[][] map)
+        public override int SolvePart1(bool[][] map)
 		{
 			return Slope(map, 3, 1);
 		}
 
-		protected override int SolvePart2(bool[][] map)
+        public override int SolvePart2(bool[][] map)
 		{
 			return Slope(map, 1, 1) * Slope(map, 3, 1) * Slope(map, 5, 1) * Slope(map, 7, 1) * Slope(map, 1, 2);
 		}

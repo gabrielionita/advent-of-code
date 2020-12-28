@@ -1,5 +1,4 @@
 ﻿using AdventOfCode.Abstractions;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 
@@ -7,11 +6,11 @@ namespace AdventOfCode.Days2020
 {
 	public class Day05 : DayBase<string[], int>
 	{
-		public Day05(HttpClient httpClient, ILogger<Day05> logger) : base(httpClient, logger)
+		public Day05(HttpClient httpClient) : base(httpClient)
 		{
 		}
 
-		protected override string[] MapInput(string input)
+        public override string[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 		}
@@ -54,7 +53,7 @@ namespace AdventOfCode.Days2020
 			return colMin;
 		}
 
-		protected override int SolvePart1(string[] codes)
+        public override int SolvePart1(string[] codes)
 		{
 			var maxSeatId = 0;
 			foreach (var code in codes)
@@ -71,7 +70,7 @@ namespace AdventOfCode.Days2020
 			return maxSeatId;
 		}
 
-		protected override int SolvePart2(string[] codes)
+        public override int SolvePart2(string[] codes)
 		{
 			var ids = new int[128, 8];
 			foreach (var code in codes)

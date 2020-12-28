@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
-using AdventOfCode.Abstractions;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Reflection;
@@ -38,7 +37,7 @@ namespace AdventOfCode
 		private IEnumerable<Type> GetDayTypes()
 		{
 			return Assembly.Load("AdventOfCode.Days").ExportedTypes
-				.Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface && t.IsAssignableTo(typeof(IRunnable)));
+				.Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface);
 		}
 	}
 }

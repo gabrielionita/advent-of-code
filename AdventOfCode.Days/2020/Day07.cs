@@ -1,5 +1,4 @@
 ﻿using AdventOfCode.Abstractions;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +10,11 @@ namespace AdventOfCode.Days2020
 	{
 		private const string shinyGoldBagName = "shiny gold";
 
-		public Day07(HttpClient httpClient, ILogger<Day07> logger) : base(httpClient, logger)
+		public Day07(HttpClient httpClient) : base(httpClient)
 		{
 		}
 
-		protected override Dictionary<string, Dictionary<string, int>> MapInput(string input)
+        public override Dictionary<string, Dictionary<string, int>> MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries)
 				.Where(line => !line.Contains("no other bags"))
@@ -27,7 +26,7 @@ namespace AdventOfCode.Days2020
 
 		}
 
-		protected override int SolvePart1(Dictionary<string, Dictionary<string, int>> bags)
+        public override int SolvePart1(Dictionary<string, Dictionary<string, int>> bags)
 		{
 			var bagsThatAlreadyContainShinyGold = new List<string>();
 			var oldAnswer = 0;
@@ -59,7 +58,7 @@ namespace AdventOfCode.Days2020
 			return answer;
 		}
 
-		protected override int SolvePart2(Dictionary<string, Dictionary<string, int>> bags)
+        public override int SolvePart2(Dictionary<string, Dictionary<string, int>> bags)
 		{
 			return CountRequiredBagsInsideOf(shinyGoldBagName, bags);
 		}
@@ -72,7 +71,7 @@ namespace AdventOfCode.Days2020
 				return 0;
 			}
 
-			foreach(var bag in bags[bagName])
+			foreach (var bag in bags[bagName])
 			{
 				answer += bag.Value + bag.Value * CountRequiredBagsInsideOf(bag.Key, bags);
 			}

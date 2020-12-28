@@ -1,5 +1,4 @@
 ﻿using AdventOfCode.Abstractions;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +12,11 @@ namespace AdventOfCode.Days2020
 		private const string accInstruction = "acc";
 		private const string jmpInstruction = "jmp";
 
-		public Day08(HttpClient httpClient, ILogger<Day08> logger) : base(httpClient, logger)
+		public Day08(HttpClient httpClient) : base(httpClient)
 		{
 		}
 
-		protected override List<Instruction> MapInput(string input)
+        public override List<Instruction> MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(line =>
 			{
@@ -26,9 +25,9 @@ namespace AdventOfCode.Days2020
 			}).ToList();
 		}
 
-		protected override int SolvePart1(List<Instruction> code) => RunCode(code);
+        public override int SolvePart1(List<Instruction> code) => RunCode(code);
 
-		protected override int SolvePart2(List<Instruction> code)
+        public override int SolvePart2(List<Instruction> code)
 		{
 			var linesChanged = new List<int>();
 			while (true)

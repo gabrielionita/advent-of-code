@@ -1,5 +1,4 @@
 ﻿using AdventOfCode.Abstractions;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -9,16 +8,16 @@ namespace AdventOfCode.Days2020
 	public class Day09 : DayBase<long[], long>
 	{
 		private const int preambleLength = 25;
-		public Day09(HttpClient httpClient, ILogger<Day09> logger) : base(httpClient, logger)
+		public Day09(HttpClient httpClient) : base(httpClient)
 		{
 		}
 
-		protected override long[] MapInput(string input)
+        public override long[] MapInput(string input)
 		{
 			return input.Split("\n", StringSplitOptions.RemoveEmptyEntries).Select(line => long.Parse(line)).ToArray();
 		}
 
-		protected override long SolvePart1(long[] numbers)
+        public override long SolvePart1(long[] numbers)
 		{
 			return FindInvalidNumber(numbers);
 		}
@@ -54,7 +53,7 @@ namespace AdventOfCode.Days2020
 			return 0;
 		}
 
-		protected override long SolvePart2(long[] numbers)
+        public override long SolvePart2(long[] numbers)
 		{
 			var invalidNumberIndex = (int)FindInvalidNumber(numbers, true);
 			var invalidNumber = numbers[invalidNumberIndex];
