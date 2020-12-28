@@ -4,12 +4,11 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace AdventOfCode
 {
-	public class Startup
+	internal class Startup
 	{
 		private readonly IConfiguration configuration;
 
@@ -28,16 +27,13 @@ namespace AdventOfCode
 
 			services.AddLogging(c => c.AddConsole().AddDebug());
 
-			foreach (var type in GetDayTypes())
+            var dayTypes = Assembly.Load("AdventOfCode.Days").ExportedTypes
+                .Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface);
+
+            foreach (var type in dayTypes)
 			{
 				services.AddTransient(type);
 			}
-		}
-
-		private IEnumerable<Type> GetDayTypes()
-		{
-			return Assembly.Load("AdventOfCode.Days").ExportedTypes
-				.Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface);
 		}
 	}
 }
