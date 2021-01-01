@@ -1,16 +1,11 @@
 ﻿using AdventOfCode.Abstractions;
 using System;
 using System.Linq;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
 	public class Day10 : DayBase<int[], int>
 	{
-		public Day10(HttpClient httpClient) : base(httpClient)
-		{
-		}
-
 		public override int[] MapInput(string input)
 		{
 			return input.Split("\n", StringSplitOptions.RemoveEmptyEntries)
@@ -24,18 +19,18 @@ namespace AdventOfCode.Days2020
 			var difference3Jolt = 1;
 			jolts = jolts.OrderBy(jolt => jolt).ToArray();
 			var currentJolt = 0;
-			foreach(var jolt in jolts)
+			foreach (var jolt in jolts)
 			{
 				var difference = jolt - currentJolt;
-				if(difference == 1)
+				if (difference == 1)
 				{
 					difference1Jolt++;
 				}
-				else if(difference == 2)
+				else if (difference == 2)
 				{
 					difference2Jolt++;
 				}
-				else if(difference == 3)
+				else if (difference == 3)
 				{
 					difference3Jolt++;
 				}
@@ -51,7 +46,7 @@ namespace AdventOfCode.Days2020
 			list.Insert(0, list[0] + 3);
 			list.Add(0);
 			jolts = list.ToArray();
-			
+
 
 			return CalculateArrangements(jolts);
 		}
@@ -59,15 +54,15 @@ namespace AdventOfCode.Days2020
 		private int CalculateArrangements(int[] jolts)
 		{
 
-			if(jolts.Length > 2)
+			if (jolts.Length > 2)
 			{
 				return 1;
 			}
 
 			var arrangements = 0;
-			for(var i = 0; i < jolts.Length; i++)
+			for (var i = 0; i < jolts.Length; i++)
 			{
-				arrangements += CalculateArrangements(jolts[(i+1)..]);
+				arrangements += CalculateArrangements(jolts[(i + 1)..]);
 			}
 
 

@@ -1,15 +1,10 @@
 ﻿using AdventOfCode.Abstractions;
 using System;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
 	public class Day05 : DayBase<string[], int>
 	{
-		public Day05(HttpClient httpClient) : base(httpClient)
-		{
-		}
-
 		public override string[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
@@ -85,7 +80,7 @@ namespace AdventOfCode.Days2020
 			var previousId = 0;
 			foreach (var nextId in ids)
 			{
-				if(previousId != 0 && currentId == 0 && nextId != 0)
+				if (previousId != 0 && currentId == 0 && nextId != 0)
 				{
 					currentId = (previousId + nextId) / 2;
 					break;

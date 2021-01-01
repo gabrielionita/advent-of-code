@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace AdventOfCode
 {
 	internal class Program
 	{
-		private const string GetStringContentMethodName = "GetStringContent";
+		private const string GetUrlMethodName = "GetUrl";
 		private const string MapInputMethodName = "MapInput";
 		private const string SolvePart1MethodName = "SolvePart1";
 		private const string SolvePart2MethodName = "SolvePart2";
@@ -26,15 +27,18 @@ namespace AdventOfCode
 		{
 			var serviceProvider = BuildServiceProvider();
 			var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+			var httpClient = serviceProvider.GetRequiredService<HttpClient>();
 
 			try
 			{
 				var dayType = GetDayType(year, day);
 				logger.LogInformation($"Running {dayType.Name}");
 				var instance = serviceProvider.GetRequiredService(dayType);
-				var content = await ((Task<string>)dayType.GetMethod(GetStringContentMethodName)
-					.Invoke(instance, null))
-					.ConfigureAwait(false);
+
+				var url = dayType.GetMethod(GetUrlMethodName).Invoke(instance, null) as string;
+				var response = await httpClient.GetAsync(url);
+				response.EnsureSuccessStatusCode();
+				var content = await response.Content.ReadAsStringAsync();
 
 				var input = dayType.GetMethod(MapInputMethodName).Invoke(instance, new[] { content });
 				var solveMethod = dayType.GetMethod(SolvePart1MethodName);

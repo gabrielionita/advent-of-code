@@ -1,16 +1,12 @@
 ﻿using AdventOfCode.Abstractions;
 using System;
 using System.Linq;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
 	public class Day09 : DayBase<long[], long>
 	{
 		private const int preambleLength = 25;
-		public Day09(HttpClient httpClient) : base(httpClient)
-		{
-		}
 
 		public override long[] MapInput(string input)
 		{

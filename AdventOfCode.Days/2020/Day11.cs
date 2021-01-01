@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-
 namespace AdventOfCode.Days2020
 {
 	public class Day11 : DayBase<char[,], int>
@@ -11,10 +9,6 @@ namespace AdventOfCode.Days2020
 		private const char EmptrySeat = 'L';
 		private const char OccupiedSeat = '#';
 		private const char Floor = '.';
-
-		public Day11(HttpClient httpClient) : base(httpClient)
-		{
-		}
 
 		public override char[,] MapInput(string input)
 		{

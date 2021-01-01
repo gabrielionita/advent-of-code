@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
@@ -10,10 +9,6 @@ namespace AdventOfCode.Days2020
 	{
 		private readonly string[] mandatoryKeys = new[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" };
 		private readonly string[] eyeColors = new[] { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
-
-		public Day04(HttpClient httpClient) : base(httpClient)
-		{
-		}
 
 		public override IEnumerable<Dictionary<string, string>> MapInput(string input)
 		{

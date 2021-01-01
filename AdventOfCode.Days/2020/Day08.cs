@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
@@ -11,10 +10,6 @@ namespace AdventOfCode.Days2020
 		private const string nopInstruction = "nop";
 		private const string accInstruction = "acc";
 		private const string jmpInstruction = "jmp";
-
-		public Day08(HttpClient httpClient) : base(httpClient)
-		{
-		}
 
 		public override List<Instruction> MapInput(string input)
 		{
@@ -40,7 +35,7 @@ namespace AdventOfCode.Days2020
 				{
 					return RunCode(code, true);
 				}
-				catch(StackOverflowException)
+				catch (StackOverflowException)
 				{
 					SwitchCode(instruction);
 				}

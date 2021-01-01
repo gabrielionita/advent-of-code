@@ -2,7 +2,6 @@
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
@@ -11,10 +10,6 @@ namespace AdventOfCode.Days2020
 		private readonly Direction[] verticalDirections = new[] { Direction.Nord, Direction.South };
 		private readonly Direction[] horizontalDirections = new[] { Direction.East, Direction.West };
 		private readonly Direction[] negativeDirections = new[] { Direction.South, Direction.West };
-
-		public Day12(HttpClient httpClient) : base(httpClient)
-		{
-		}
 
 		public override string[] MapInput(string input)
 		{
@@ -91,7 +86,7 @@ namespace AdventOfCode.Days2020
 
 				if (code == "L" || code == "R")
 				{
-					if(code == "R")
+					if (code == "R")
 					{
 						value *= -1;
 					}
@@ -147,13 +142,15 @@ namespace AdventOfCode.Days2020
 				Y = (int)Math.Round(sinTheta * pointToRotate.X + cosTheta * pointToRotate.Y, 0)
 			};
 		}
+
+		public enum Direction
+		{
+			Nord,
+			East,
+			South,
+			West
+		}
 	}
 
-	public enum Direction
-	{
-		Nord,
-		East,
-		South,
-		West
-	}
+
 }

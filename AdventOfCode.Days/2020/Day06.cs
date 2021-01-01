@@ -1,16 +1,11 @@
 ﻿using AdventOfCode.Abstractions;
 using System;
 using System.Linq;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
 	public class Day06 : DayBase<string[], int>
 	{
-		public Day06(HttpClient httpClient) : base(httpClient)
-		{
-		}
-
 		public override string[] MapInput(string input)
 		{
 			return input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);

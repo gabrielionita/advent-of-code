@@ -1,28 +1,18 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace AdventOfCode.Abstractions
+﻿namespace AdventOfCode.Abstractions
 {
 	public abstract class DayBase<TInput, TSolution>
 	{
 		private readonly int day;
 		private readonly int year;
-		private readonly HttpClient httpClient;
 
-		protected DayBase(HttpClient httpClient)
+		protected DayBase()
 		{
-			this.httpClient = httpClient;
 			var type = GetType();
 			day = int.Parse(type.Name.Substring(3));
 			year = int.Parse(type.FullName.Substring(type.FullName.IndexOf("Days") + 4, 4));
 		}
 
-		public async Task<string> GetStringContent()
-		{
-			var response = await httpClient.GetAsync($"{year}/day/{day}/input");
-			response.EnsureSuccessStatusCode();
-			return await response.Content.ReadAsStringAsync();
-		}
+		public string GetUrl() => $"{year}/day/{day}/input";
 
 		public abstract TInput MapInput(string input);
 

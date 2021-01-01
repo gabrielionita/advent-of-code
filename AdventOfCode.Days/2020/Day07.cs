@@ -2,17 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 
 namespace AdventOfCode.Days2020
 {
 	public class Day07 : DayBase<Dictionary<string, Dictionary<string, int>>, int>
 	{
 		private const string shinyGoldBagName = "shiny gold";
-
-		public Day07(HttpClient httpClient) : base(httpClient)
-		{
-		}
 
 		public override Dictionary<string, Dictionary<string, int>> MapInput(string input)
 		{
