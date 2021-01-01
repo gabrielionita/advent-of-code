@@ -1,5 +1,4 @@
-﻿using AdventOfCode.Abstractions;
-using System;
+﻿using System;
 
 namespace AdventOfCode.Days2020
 {

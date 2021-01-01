@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Abstractions
+﻿namespace AdventOfCode
 {
 	public abstract class DayBase<TInput, TSolution>
 	{

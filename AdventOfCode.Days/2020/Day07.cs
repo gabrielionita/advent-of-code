@@ -1,5 +1,4 @@
-﻿using AdventOfCode.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +16,8 @@ namespace AdventOfCode.Days2020
 				.ToDictionary(line => line.Substring(0, line.IndexOf(" bags")),
 							line => line.Substring(line.IndexOf("contain") + "contain ".Length)
 							.Split(", ", StringSplitOptions.RemoveEmptyEntries)
-							.ToDictionary(l => l.Substring(l.IndexOf(" ") + 1, l.LastIndexOf(" ") - l.IndexOf(" ") - 1), l => l.Contains("no other bags") ? 0 : int.Parse(l.Substring(0, l.IndexOf(" ")))));
+							.ToDictionary(l => l.Substring(l.IndexOf(" ") + 1, l.LastIndexOf(" ") - l.IndexOf(" ") - 1), 
+										l => l.Contains("no other bags") ? 0 : int.Parse(l.Substring(0, l.IndexOf(" ")))));
 
 		}
 
