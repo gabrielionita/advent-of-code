@@ -39,6 +39,7 @@ namespace AdventOfCode
 				var input = dayType.GetMethod(MapInputMethodName).Invoke(instance, new[] { content });
 				var solveMethod = dayType.GetMethod(SolvePart1MethodName);
 				var defaultSolution = Activator.CreateInstance(solveMethod.ReturnType);
+
 				var solution = solveMethod.Invoke(instance, new[] { input });
 				if (solution.Equals(defaultSolution))
 				{
@@ -46,7 +47,8 @@ namespace AdventOfCode
 				}
 				logger.LogInformation($"Solution for part 1: {solution}");
 
-				solution = dayType.GetMethod(SolvePart2MethodName).Invoke(instance, new[] { input });
+                input = dayType.GetMethod(MapInputMethodName).Invoke(instance, new[] { content });
+                solution = dayType.GetMethod(SolvePart2MethodName).Invoke(instance, new[] { input });
 				if (solution.Equals(defaultSolution))
 				{
 					throw new Exception("No solution was found");

@@ -17,7 +17,7 @@ namespace AdventOfCode.Abstractions
             year = int.Parse(type.FullName.Substring(type.FullName.IndexOf("Days") + 4, 4));
 		}
 
-        public virtual async Task<string> GetStringContent()
+        public async Task<string> GetStringContent()
 		{
 			var response = await httpClient.GetAsync($"{year}/day/{day}/input");
 			response.EnsureSuccessStatusCode();
