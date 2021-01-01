@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -68,8 +67,7 @@ namespace AdventOfCode
 		private static IServiceProvider BuildServiceProvider()
 		{
 			var configuration = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-				.AddJsonFile("appsettings.json", false)
+				.AddUserSecrets<Program>()
 				.Build();
 
 			var services = new ServiceCollection();
