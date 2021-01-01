@@ -10,7 +10,7 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override string[] MapInput(string input)
+		public override string[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 		}
@@ -53,7 +53,7 @@ namespace AdventOfCode.Days2020
 			return colMin;
 		}
 
-        public override int SolvePart1(string[] codes)
+		public override int SolvePart1(string[] codes)
 		{
 			var maxSeatId = 0;
 			foreach (var code in codes)
@@ -70,7 +70,7 @@ namespace AdventOfCode.Days2020
 			return maxSeatId;
 		}
 
-        public override int SolvePart2(string[] codes)
+		public override int SolvePart2(string[] codes)
 		{
 			var ids = new int[128, 8];
 			foreach (var code in codes)

@@ -10,7 +10,7 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override bool[][] MapInput(string input)
+		public override bool[][] MapInput(string input)
 		{
 			var lines = input.Split('\n', System.StringSplitOptions.RemoveEmptyEntries).ToArray();
 			var map = new bool[lines.Length][];
@@ -22,7 +22,7 @@ namespace AdventOfCode.Days2020
 			return map;
 		}
 
-        public int Slope(bool[][] map, int right, int down)
+		public int Slope(bool[][] map, int right, int down)
 		{
 			var treesEncountered = 0;
 			var i = 0;
@@ -41,12 +41,12 @@ namespace AdventOfCode.Days2020
 			return treesEncountered;
 		}
 
-        public override int SolvePart1(bool[][] map)
+		public override int SolvePart1(bool[][] map)
 		{
 			return Slope(map, 3, 1);
 		}
 
-        public override int SolvePart2(bool[][] map)
+		public override int SolvePart2(bool[][] map)
 		{
 			return Slope(map, 1, 1) * Slope(map, 3, 1) * Slope(map, 5, 1) * Slope(map, 7, 1) * Slope(map, 1, 2);
 		}

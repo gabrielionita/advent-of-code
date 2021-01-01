@@ -11,13 +11,13 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override int[] MapInput(string input)
+		public override int[] MapInput(string input)
 		{
 			return input.Split("\n", StringSplitOptions.RemoveEmptyEntries)
 				.Select(line => int.Parse(line)).ToArray();
 		}
 
-        public override int SolvePart1(int[] jolts)
+		public override int SolvePart1(int[] jolts)
 		{
 			var difference1Jolt = 0;
 			var difference2Jolt = 0;
@@ -45,7 +45,7 @@ namespace AdventOfCode.Days2020
 			return difference1Jolt * difference3Jolt;
 		}
 
-        public override int SolvePart2(int[] jolts)
+		public override int SolvePart2(int[] jolts)
 		{
 			var list = jolts.OrderByDescending(jolt => jolt).ToList();
 			list.Insert(0, list[0] + 3);

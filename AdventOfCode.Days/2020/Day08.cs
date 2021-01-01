@@ -16,7 +16,7 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override List<Instruction> MapInput(string input)
+		public override List<Instruction> MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(line =>
 			{
@@ -25,9 +25,9 @@ namespace AdventOfCode.Days2020
 			}).ToList();
 		}
 
-        public override int SolvePart1(List<Instruction> code) => RunCode(code);
+		public override int SolvePart1(List<Instruction> code) => RunCode(code);
 
-        public override int SolvePart2(List<Instruction> code)
+		public override int SolvePart2(List<Instruction> code)
 		{
 			var linesChanged = new List<int>();
 			while (true)

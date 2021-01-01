@@ -11,12 +11,12 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override string[] MapInput(string input)
+		public override string[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 		}
 
-        public override int SolvePart1(string[] lines)
+		public override int SolvePart1(string[] lines)
 		{
 			var validPasswords = 0;
 			foreach(var line in lines)
@@ -38,7 +38,7 @@ namespace AdventOfCode.Days2020
 			return validPasswords;
 		}
 
-        public override int SolvePart2(string[] lines)
+		public override int SolvePart2(string[] lines)
 		{
 			var validPasswords = 0;
 			foreach (var line in lines)

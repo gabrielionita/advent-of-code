@@ -15,14 +15,14 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override IEnumerable<Dictionary<string, string>> MapInput(string input)
+		public override IEnumerable<Dictionary<string, string>> MapInput(string input)
 		{
 			return input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries)
 				.Select(c => c.Split(new[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries)
 						.ToDictionary(key => key.Split(":")[0], value => value.Split(":")[1]));
 		}
 
-        public override int SolvePart1(IEnumerable<Dictionary<string, string>> passports)
+		public override int SolvePart1(IEnumerable<Dictionary<string, string>> passports)
 		{
 			var validPassports = 0;
 			foreach (var passport in passports)
@@ -37,7 +37,7 @@ namespace AdventOfCode.Days2020
 			return validPassports;
 		}
 
-        public override int SolvePart2(IEnumerable<Dictionary<string, string>> passports)
+		public override int SolvePart2(IEnumerable<Dictionary<string, string>> passports)
 		{
 			var validPassports = 0;
 			foreach (var passport in passports)

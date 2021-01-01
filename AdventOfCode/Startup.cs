@@ -27,10 +27,10 @@ namespace AdventOfCode
 
 			services.AddLogging(c => c.AddConsole().AddDebug());
 
-            var dayTypes = Assembly.Load("AdventOfCode.Days").ExportedTypes
-                .Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface);
+			var dayTypes = Assembly.Load("AdventOfCode.Days").ExportedTypes
+				.Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface);
 
-            foreach (var type in dayTypes)
+			foreach (var type in dayTypes)
 			{
 				services.AddTransient(type);
 			}

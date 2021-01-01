@@ -11,17 +11,17 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override string[] MapInput(string input)
+		public override string[] MapInput(string input)
 		{
 			return input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
 		}
 
-        public override int SolvePart1(string[] groups)
+		public override int SolvePart1(string[] groups)
 		{
 			return groups.Sum(group => group.Replace("\n", string.Empty).Distinct().Count());
 		}
 
-        public override int SolvePart2(string[] groups)
+		public override int SolvePart2(string[] groups)
 		{
 			return groups.Sum(group =>
 				group.Split("\n", StringSplitOptions.RemoveEmptyEntries)

@@ -12,12 +12,12 @@ namespace AdventOfCode.Days2020
 		{
 		}
 
-        public override long[] MapInput(string input)
+		public override long[] MapInput(string input)
 		{
 			return input.Split("\n", StringSplitOptions.RemoveEmptyEntries).Select(line => long.Parse(line)).ToArray();
 		}
 
-        public override long SolvePart1(long[] numbers)
+		public override long SolvePart1(long[] numbers)
 		{
 			return FindInvalidNumber(numbers);
 		}
@@ -53,7 +53,7 @@ namespace AdventOfCode.Days2020
 			return 0;
 		}
 
-        public override long SolvePart2(long[] numbers)
+		public override long SolvePart2(long[] numbers)
 		{
 			var invalidNumberIndex = (int)FindInvalidNumber(numbers, true);
 			var invalidNumber = numbers[invalidNumberIndex];
