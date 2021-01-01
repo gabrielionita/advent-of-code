@@ -121,13 +121,13 @@ namespace AdventOfCode.Days2020
 			return Math.Abs(shipPosition.X) + Math.Abs(shipPosition.Y);
 		}
 
-		private Direction GetDirection(string code) => code switch
+		private Direction GetDirection(string direction) => direction switch
 		{
 			"N" => Direction.Nord,
 			"E" => Direction.East,
 			"S" => Direction.South,
 			"W" => Direction.West,
-			_ => throw new ArgumentException()
+			_ => throw new ArgumentException("Invalid direction", nameof(direction))
 		};
 
 		private Point RotatePoint(Point pointToRotate, double angleInDegrees)
