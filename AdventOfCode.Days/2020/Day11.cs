@@ -11,6 +11,7 @@ namespace AdventOfCode.Days2020
         private const char EmptrySeat = 'L';
         private const char OccupiedSeat = '#';
         private const char Floor = '.';
+
         public Day11(HttpClient httpClient) : base(httpClient)
         {
         }
@@ -31,13 +32,13 @@ namespace AdventOfCode.Days2020
 
         public override int SolvePart1(char[,] map)
         {
-            while (ChangeSeats(map, 4, false)) ;
+            ChangeSeats(map, 4, false);
             return map.Cast<char>().Count(seat => seat == OccupiedSeat);
         }
 
         public override int SolvePart2(char[,] map)
         {
-            while (ChangeSeats(map, 5, true)) ;
+            ChangeSeats(map, 5, true);
             return map.Cast<char>().Count(seat => seat == OccupiedSeat);
         }
 
@@ -59,7 +60,7 @@ namespace AdventOfCode.Days2020
                     var currentColumn = column + j;
                     if (firstSeat)
                     {
-                        while(currentRow >= 0 && currentRow < rows && currentColumn >= 0 && currentColumn < columns)
+                        while (currentRow >= 0 && currentRow < rows && currentColumn >= 0 && currentColumn < columns)
                         {
                             if (map[currentRow, currentColumn] != Floor)
                             {
@@ -87,7 +88,7 @@ namespace AdventOfCode.Days2020
             return adjacent.ToArray();
         }
 
-        private bool ChangeSeats(char[,] map, int maxOccupiedSeats, bool firstSeat)
+        private void ChangeSeats(char[,] map, int maxOccupiedSeats, bool firstSeat)
         {
             var changeDetected = false;
             var oldMap = map.Clone() as char[,];
@@ -114,7 +115,10 @@ namespace AdventOfCode.Days2020
                     }
                 }
             }
-            return changeDetected;
+            if (changeDetected)
+            {
+                ChangeSeats(map, maxOccupiedSeats, firstSeat);
+            }
         }
     }
 }
