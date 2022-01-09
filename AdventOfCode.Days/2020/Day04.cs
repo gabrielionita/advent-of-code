@@ -51,7 +51,7 @@ namespace AdventOfCode.Days2020
 						continue;
 					}
 
-					if (!passport["hcl"].StartsWith("#") || !int.TryParse(passport["hcl"].Substring(1), System.Globalization.NumberStyles.HexNumber, null, out var hairColor))
+					if (!passport["hcl"].StartsWith("#") || !int.TryParse(passport["hcl"][1..], System.Globalization.NumberStyles.HexNumber, null, out var hairColor))
 					{
 						continue;
 					}
@@ -67,7 +67,7 @@ namespace AdventOfCode.Days2020
 						indexOfHeightUnit = passport["hgt"].IndexOf("in");
 					}
 
-					if (!int.TryParse(passport["hgt"].Substring(0, indexOfHeightUnit), out var height))
+					if (!int.TryParse(passport["hgt"][0..indexOfHeightUnit], out var height))
 					{
 						continue;
 					}

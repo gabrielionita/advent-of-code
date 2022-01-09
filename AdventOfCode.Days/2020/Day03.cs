@@ -16,7 +16,7 @@ namespace AdventOfCode.Days2020
 			return map;
 		}
 
-		public int Slope(bool[][] map, int right, int down)
+		private int Slope(bool[][] map, int right, int down)
 		{
 			var treesEncountered = 0;
 			var i = 0;

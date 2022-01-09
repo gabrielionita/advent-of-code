@@ -3,15 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
 namespace AdventOfCode
 {
-	internal class Program
+    public class Program
 	{
-		private const string GetUrlMethodName = "GetUrl";
 		private const string MapInputMethodName = "MapInput";
 		private const string SolvePart1MethodName = "SolvePart1";
 		private const string SolvePart2MethodName = "SolvePart2";
@@ -26,18 +24,21 @@ namespace AdventOfCode
 		{
 			var serviceProvider = BuildServiceProvider();
 			var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-			var httpClient = serviceProvider.GetRequiredService<HttpClient>();
+			var adventOfCodeClient = serviceProvider.GetRequiredService<AdventOfCodeClient>();
 
 			try
 			{
-				var dayType = GetDayType(year, day);
-				logger.LogInformation($"Running {dayType.Name}");
+				var dayType = GetDayType(year, day)!;
+				logger.LogInformation("Running {dayTypeName}", dayType.Name);
 				var instance = serviceProvider.GetRequiredService(dayType);
 
-				var url = dayType.GetMethod(GetUrlMethodName).Invoke(instance, null) as string;
-				var response = await httpClient.GetAsync(url);
-				response.EnsureSuccessStatusCode();
-				var content = await response.Content.ReadAsStringAsync();
+				if(!year.HasValue || !day.HasValue)
+                {
+					day = int.Parse(dayType.Name.Substring(3));
+					year = int.Parse(dayType.FullName.Substring(dayType.FullName.IndexOf("Days") + 4, 4));
+				}
+
+				var content = await adventOfCodeClient.GetInput(year.Value, day.Value);
 
 				var input = dayType.GetMethod(MapInputMethodName).Invoke(instance, new[] { content });
 				var solveMethod = dayType.GetMethod(SolvePart1MethodName);
@@ -48,7 +49,7 @@ namespace AdventOfCode
 				{
 					throw new Exception("No solution was found");
 				}
-				logger.LogInformation($"Solution for part 1: {solution}");
+				logger.LogInformation("Solution for part 1: {solution}", solution);
 
 				input = dayType.GetMethod(MapInputMethodName).Invoke(instance, new[] { content });
 				solution = dayType.GetMethod(SolvePart2MethodName).Invoke(instance, new[] { input });
@@ -56,7 +57,7 @@ namespace AdventOfCode
 				{
 					throw new Exception("No solution was found");
 				}
-				logger.LogInformation($"Solution for part 2: {solution}");
+				logger.LogInformation("Solution for part 2: {solution}", solution);
 			}
 			catch (Exception exception)
 			{
@@ -84,8 +85,9 @@ namespace AdventOfCode
 			}
 
 			return Assembly.Load("AdventOfCode.Days").ExportedTypes
-				.Where(type => !type.IsAbstract && type.Name.StartsWith("Day")).OrderByDescending(type => type.Name)
-				.First();
+				.Where(type => !type.IsAbstract && type.Name.StartsWith("Day"))
+				.OrderByDescending(type => type.FullName)
+				.FirstOrDefault();
 		}
 	}
 }
