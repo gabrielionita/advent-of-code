@@ -22,6 +22,7 @@ namespace AdventOfCode
 				.ConfigureServices((context, services) =>
 				{
 					services.AddSingleton<DayFactory>();
+					services.AddSingleton<InputStorage>();
 					services.AddSingleton<InputDownloadHandler>();
 					services.AddSingleton<DayHandler>();
 					services.AddHttpClient<AdventOfCodeClient>(options =>
