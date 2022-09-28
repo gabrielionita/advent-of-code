@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace AdventOfCode
@@ -16,14 +15,13 @@ namespace AdventOfCode
 	{
 		public static async Task Main(string[] args)
 		{
-			using var host = Host.CreateDefaultBuilder(args)
+			await Host.CreateDefaultBuilder(args)
 				.ConfigureLogging(logging => logging.AddConsole().AddDebug())
 				.ConfigureAppConfiguration(configuration => configuration.AddUserSecrets<Program>())
 				.ConfigureServices((context, services) =>
 				{
 					services.AddSingleton<DayFactory>();
-					services.AddSingleton<InputDownloadHandler>();
-					services.AddSingleton<DayHandler>();
+					services.AddSingleton<InputStorage>();
 					services.AddHttpClient<AdventOfCodeClient>(options =>
 					{
 						options.BaseAddress = new Uri(context.Configuration["AdventOfCodeBaseUrl"]);
@@ -37,14 +35,7 @@ namespace AdventOfCode
 					{
 						services.AddTransient(type);
 					}
-				}).Build();
-
-            if (args.Contains("--download=true"))
-            {
-				await host.Services.GetRequiredService<InputDownloadHandler>().DownloadInputs(CancellationToken.None);
-            }
-
-			await host.Services.GetRequiredService<DayHandler>().Execute(CancellationToken.None);
+				}).RunCommandLineApplicationAsync<DayCommand>(args);
 		}
 	}
 }
