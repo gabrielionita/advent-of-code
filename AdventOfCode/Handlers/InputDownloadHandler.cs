@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Services;
+﻿using AdventOfCode.Abstractions;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace AdventOfCode.Handlers
     public class InputDownloadHandler
     {
         private readonly IConfiguration configuration;
-        private readonly InputStorage inputStorage;
-        private readonly AdventOfCodeClient adventOfCodeClient;
+        private readonly IInputStorage inputStorage;
+        private readonly IAdventOfCodeClient adventOfCodeClient;
 
-        public InputDownloadHandler(IConfiguration configuration, InputStorage inputStorage, AdventOfCodeClient adventOfCodeClient)
+        public InputDownloadHandler(IConfiguration configuration, IInputStorage inputStorage, IAdventOfCodeClient adventOfCodeClient)
         {
             this.configuration = configuration;
             this.inputStorage = inputStorage;

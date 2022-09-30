@@ -1,4 +1,5 @@
-﻿using AdventOfCode.Handlers;
+﻿using AdventOfCode.Abstractions;
+using AdventOfCode.Handlers;
 using AdventOfCode.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,11 +22,11 @@ namespace AdventOfCode
 				.ConfigureAppConfiguration(configuration => configuration.AddUserSecrets<Program>())
 				.ConfigureServices((context, services) =>
 				{
-					services.AddSingleton<DayFactory>();
-					services.AddSingleton<InputStorage>();
+					services.AddSingleton<IDayFactory, DayFactory>();
+					services.AddSingleton<IInputStorage, InputStorage>();
 					services.AddSingleton<InputDownloadHandler>();
 					services.AddSingleton<DayHandler>();
-					services.AddHttpClient<AdventOfCodeClient>(options =>
+					services.AddHttpClient<IAdventOfCodeClient, AdventOfCodeClient>(options =>
 					{
 						options.BaseAddress = new Uri(context.Configuration["AdventOfCodeBaseUrl"]);
 						options.DefaultRequestHeaders.Add("cookie", $"session={context.Configuration["CookieSession"]}");
