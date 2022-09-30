@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Services
 {
@@ -28,7 +29,7 @@ namespace AdventOfCode.Services
             }
 
             return typeof(Days2020.Day01).Assembly.ExportedTypes
-                .Where(type => !type.IsAbstract && type.Name.StartsWith("Day"))
+                .Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && Regex.IsMatch(type.Name, "^Day(\\d{2,})$"))
                 .OrderByDescending(type => type.FullName)
                 .FirstOrDefault();
         }

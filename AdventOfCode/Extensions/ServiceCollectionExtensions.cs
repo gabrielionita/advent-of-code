@@ -1,6 +1,6 @@
 ﻿using AdventOfCode.HostedServices;
 using System.Linq;
-using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -8,8 +8,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddDays(this IServiceCollection services)
         {
-            var dayTypes = Assembly.Load("AdventOfCode.Days").ExportedTypes
-                    .Where(t => t.IsClass && !t.IsAbstract && !t.IsInterface);
+            var dayTypes = typeof(AdventOfCode.Days2020.Day01).Assembly.ExportedTypes
+                    .Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && Regex.IsMatch(type.Name, @"^Day(\d{2,})$"));
 
             foreach (var type in dayTypes)
                 services.AddTransient(type);

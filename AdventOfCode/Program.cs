@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdventOfCode
@@ -16,11 +15,10 @@ namespace AdventOfCode
         {
             await Host.CreateDefaultBuilder(args)
                 .ConfigureLogging(logging => logging.AddConsole().AddDebug())
-                .ConfigureAppConfiguration(configuration => configuration.AddUserSecrets<Program>())
                 .ConfigureServices((context, services) =>
                 {
                     services.AddDays();
-                    services.AddHostedService(args.Contains("--download=true"));
+                    services.AddHostedService(context.Configuration.GetValue<bool>("Download"));
                     services.AddSingleton<IDayFactory, DayFactory>();
                     services.AddSingleton<IInputStorage, InputStorage>();
                     services.AddHttpClient<IAdventOfCodeClient, AdventOfCodeClient>(options =>
