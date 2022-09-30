@@ -1,20 +1,21 @@
 ﻿using AdventOfCode.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AdventOfCode.Handlers
+namespace AdventOfCode.HostedServices
 {
-    public class DayHandler
+    public class DayHostedService : BackgroundService
     {
         private readonly ILogger logger;
         private readonly IConfiguration configuration;
         private readonly IDayFactory dayFactory;
         private readonly IInputStorage inputStorage;
 
-        public DayHandler(ILogger<DayHandler> logger, IConfiguration configuration, IDayFactory dayFactory, IInputStorage inputStorage)
+        public DayHostedService(ILogger<DayHostedService> logger, IConfiguration configuration, IDayFactory dayFactory, IInputStorage inputStorage)
         {
             this.logger = logger;
             this.configuration = configuration;
@@ -22,7 +23,7 @@ namespace AdventOfCode.Handlers
             this.inputStorage = inputStorage;
         }
 
-        public async Task Execute(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             var year = configuration.GetValue<int?>("Year");
             var day = configuration.GetValue<int?>("Day");
@@ -37,7 +38,7 @@ namespace AdventOfCode.Handlers
                 }
 
                 logger.LogInformation("Running Day{day:00} of {year}", day, year);
-                
+
                 var content = await inputStorage.Read(year.Value, day.Value, cancellationToken);
                 Execute(instance, content);
             }
