@@ -3,31 +3,31 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-    public class Day01 : DayBase<int[], int>
-    {
-        public override int[] MapInput(string input) => input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+	public class Day01 : DayBase<int[], int>
+	{
+		public override int[] MapInput(string input) => input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
-        public override int SolvePart1(int[] input) => GenericSolution(input, 1);
+		public override int SolvePart1(int[] input) => GenericSolution(input, 1);
 
-        public override int SolvePart2(int[] input) => GenericSolution(input, 3);
+		public override int SolvePart2(int[] input) => GenericSolution(input, 3);
 
-        private int GenericSolution(int[] input, int windowSize)
-        {
-            var increases = 0;
-            var previousSum = int.MaxValue;
-            for (var i = windowSize - 1; i < input.Length; i++)
-            {
-                var sum = 0;
-                for (var j = 0; j < windowSize; j++)
-                    sum += input[i - j];
+		private int GenericSolution(int[] input, int windowSize)
+		{
+			var increases = 0;
+			var previousSum = int.MaxValue;
+			for (var i = windowSize - 1; i < input.Length; i++)
+			{
+				var sum = 0;
+				for (var j = 0; j < windowSize; j++)
+					sum += input[i - j];
 
-                if (previousSum < sum)
-                    increases++;
+				if (previousSum < sum)
+					increases++;
 
-                previousSum = sum;
-            }
+				previousSum = sum;
+			}
 
-            return increases;
-        }
-    }
+			return increases;
+		}
+	}
 }

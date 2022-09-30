@@ -1,11 +1,11 @@
 {
-  "profiles": {
-    "AdventOfCode": {
-      "commandName": "Project",
-      "commandLineArgs": "--download=false --year=2021 --day=",
-      "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
-      }
-    }
-  }
+	"profiles": {
+		"AdventOfCode": {
+			"commandName": "Project",
+			"commandLineArgs": "--download=false --year=2021 --day=",
+			"environmentVariables": {
+				"DOTNET_ENVIRONMENT": "Development"
+			}
+		}
+	}
 }
