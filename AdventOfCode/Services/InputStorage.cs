@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Abstractions;
+﻿using AdventOfCode.Interfaces;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;

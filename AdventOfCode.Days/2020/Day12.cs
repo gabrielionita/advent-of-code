@@ -7,7 +7,6 @@ namespace AdventOfCode.Days2020
 	public class Day12 : DayBase<string[], int>
 	{
 		private readonly Direction[] verticalDirections = new[] { Direction.Nord, Direction.South };
-		private readonly Direction[] horizontalDirections = new[] { Direction.East, Direction.West };
 		private readonly Direction[] negativeDirections = new[] { Direction.South, Direction.West };
 
 		public override string[] MapInput(string input)

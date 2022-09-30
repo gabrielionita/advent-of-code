@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Abstractions;
+﻿using AdventOfCode.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
@@ -13,7 +13,6 @@ namespace AdventOfCode.Services
         {
             this.serviceProvider = serviceProvider;
         }
-
 
         public object Create(int? year, int? day)
         {

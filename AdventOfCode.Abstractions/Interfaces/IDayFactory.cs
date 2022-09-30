@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AdventOfCode.Abstractions
+﻿namespace AdventOfCode.Interfaces
 {
     public interface IDayFactory
     {

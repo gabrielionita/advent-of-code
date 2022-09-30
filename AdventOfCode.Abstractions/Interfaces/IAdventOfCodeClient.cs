@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace AdventOfCode.Abstractions
+namespace AdventOfCode.Interfaces
 {
     public interface IAdventOfCodeClient
     {

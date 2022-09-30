@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Threading;
 
-namespace AdventOfCode.Abstractions
+namespace AdventOfCode.Interfaces
 {
     public interface IInputStorage
     {

@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Abstractions;
+﻿using AdventOfCode.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;

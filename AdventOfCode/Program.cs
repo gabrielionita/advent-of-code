@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Abstractions;
+﻿using AdventOfCode.Interfaces;
 using AdventOfCode.Handlers;
 using AdventOfCode.Services;
 using Microsoft.Extensions.Configuration;
