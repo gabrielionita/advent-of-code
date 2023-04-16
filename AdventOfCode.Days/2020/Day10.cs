@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day10 : DayBase<int[], int>
+	public class Day10 : DayBase<int[], long>
 	{
 		public override int[] MapInput(string input)
 		{
@@ -11,7 +12,7 @@ namespace AdventOfCode.Days2020
 				.Select(line => int.Parse(line)).ToArray();
 		}
 
-		public override int SolvePart1(int[] jolts)
+		public override long SolvePart1(int[] jolts)
 		{
 			var difference1Jolt = 0;
 			var difference2Jolt = 0;
@@ -39,33 +40,49 @@ namespace AdventOfCode.Days2020
 			return difference1Jolt * difference3Jolt;
 		}
 
-		public override int SolvePart2(int[] jolts)
+		public override long SolvePart2(int[] jolts)
 		{
-			var list = jolts.OrderByDescending(jolt => jolt).ToList();
-			list.Insert(0, list[0] + 3);
-			list.Add(0);
+			var list = jolts.OrderBy(jolt => jolt).ToList();
+			list.Add(list[^1] + 3);
+			list.Insert(0, 0);
 			jolts = list.ToArray();
 
-
-			return CalculateArrangements(jolts);
-		}
-
-		private int CalculateArrangements(int[] jolts)
-		{
-
-			if (jolts.Length > 2)
+			var deltas = new int[jolts.Length];
+            for (var i = 1; i < jolts.Length; i++)
 			{
-				return 1;
+				deltas[i] = jolts[i] - jolts[i - 1];
 			}
 
-			var arrangements = 0;
-			for (var i = 0; i < jolts.Length; i++)
+			var continuousOnes = new List<int>();
+
+			var ones = 0;
+			foreach(var delta in deltas)
 			{
-				arrangements += CalculateArrangements(jolts[(i + 1)..]);
+				if (delta == 1)
+				{
+					ones++;
+					continue;
+				}
+
+				if (ones == 0)
+					continue;
+
+				continuousOnes.Add(ones);
+				ones = 0;
 			}
 
+			return continuousOnes.Aggregate(1L, (sum, sequenceLength) => sum *= Tribonacci(sequenceLength + 3));
+        }
 
-			return arrangements;
-		}
-	}
+        public long Tribonacci(int n)
+        {
+            if (n is 0 or 1 or 2)
+                return 0;
+
+            if (n == 3)
+                return 1;
+
+            return Tribonacci(n - 1) + Tribonacci(n - 2) + Tribonacci(n - 3);
+        }
+    }
 }
