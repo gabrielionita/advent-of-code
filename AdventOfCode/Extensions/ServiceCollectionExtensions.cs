@@ -1,4 +1,5 @@
 ﻿using AdventOfCode.HostedServices;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -20,7 +21,14 @@ namespace Microsoft.Extensions.DependencyInjection
 		public static IServiceCollection AddHostedService(this IServiceCollection services, bool download)
 		{
 			if (download)
+			{
+				var current = Directory.GetCurrentDirectory();
+				if (current.Contains("bin"))
+				{
+					Directory.SetCurrentDirectory(current.Substring(0, current.IndexOf("bin")));
+				}
 				services.AddHostedService<InputDownloadHostedService>();
+			}
 			else
 				services.AddHostedService<DayHostedService>();
 
