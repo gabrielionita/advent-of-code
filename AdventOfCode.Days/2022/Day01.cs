@@ -10,7 +10,7 @@ namespace AdventOfCode.Days2022
 			var lines = input.Split('\n');
 			var caloriesByElves = new List<List<int>>
 			{
-				new List<int>()
+				new()
 			};
 			foreach (var line in lines)
 			{

@@ -30,7 +30,7 @@ namespace AdventOfCode.HostedServices
 			var day = configuration.GetValue<int?>("Day");
 			try
 			{
-				dynamic instance = dayFactory.Create(year, day);
+				var instance = dayFactory.Create(year, day);
 				if (!year.HasValue || !day.HasValue)
 				{
 					var dayType = instance.GetType();
@@ -41,7 +41,7 @@ namespace AdventOfCode.HostedServices
 				logger.LogInformation("Running Day{day:00} of {year}", day, year);
 
 				var content = await inputStorage.Read(year.Value, day.Value, cancellationToken);
-				Execute(instance, content);
+				Execute((dynamic)instance, content);
 			}
 			catch (Exception exception)
 			{

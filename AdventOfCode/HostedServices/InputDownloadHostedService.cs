@@ -23,16 +23,11 @@ namespace AdventOfCode.HostedServices
 
 		protected override async Task ExecuteAsync(CancellationToken cancellationToken)
 		{
-			var year = configuration.GetValue<int?>("Year");
-			if (year == null)
-			{
-				throw new ArgumentNullException(nameof(year), "Cannot download inputs without an year specified");
-			}
-
+			var year = configuration.GetValue("Year", DateTime.Now.Year);
 			foreach (var day in Enumerable.Range(1, 25))
 			{
-				var content = await adventOfCodeClient.GetInput(year.Value, day, cancellationToken);
-				await inputStorage.Write(year.Value, day, content, cancellationToken);
+				var content = await adventOfCodeClient.GetInput(year, day, cancellationToken);
+				await inputStorage.Write(year, day, content, cancellationToken);
 				await Task.Delay(100, cancellationToken);
 			}
 		}
