@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days2022
 {
-	public class Day01 : DayBase<List<List<int>>, int>
+	public class Day01 : IDay<List<List<int>>, int>
 	{
-		public override List<List<int>> MapInput(string input)
+		public List<List<int>> MapInput(string input)
 		{
 			var lines = input.Split('\n');
 			var caloriesByElves = new List<List<int>>
@@ -28,12 +28,12 @@ namespace AdventOfCode.Days2022
 			return caloriesByElves;
 		}
 
-		public override int SolvePart1(List<List<int>> input)
+		public int SolvePart1(List<List<int>> input)
 		{
 			return input.Max(elf => elf.Sum());
 		}
 
-		public override int SolvePart2(List<List<int>> input)
+		public int SolvePart2(List<List<int>> input)
 		{
 			return input.Select(elf => elf.Sum()).OrderByDescending(sum => sum).Take(3).Sum();
 		}

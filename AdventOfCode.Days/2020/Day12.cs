@@ -4,17 +4,17 @@ using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day12 : DayBase<string[], int>
+	public class Day12 : IDay<string[], int>
 	{
 		private readonly Direction[] verticalDirections = new[] { Direction.Nord, Direction.South };
 		private readonly Direction[] negativeDirections = new[] { Direction.South, Direction.West };
 
-		public override string[] MapInput(string input)
+		public string[] MapInput(string input)
 		{
 			return input.Split("\n", StringSplitOptions.RemoveEmptyEntries);
 		}
 
-		public override int SolvePart1(string[] instructions)
+		public int SolvePart1(string[] instructions)
 		{
 			var shipPosition = new Point(0, 0);
 			var facing = Direction.East;
@@ -73,7 +73,7 @@ namespace AdventOfCode.Days2020
 			return Math.Abs(shipPosition.X) + Math.Abs(shipPosition.Y);
 		}
 
-		public override int SolvePart2(string[] instructions)
+		public int SolvePart2(string[] instructions)
 		{
 			var shipPosition = new Point(0, 0);
 			var waypoint = new Point(10, 1);

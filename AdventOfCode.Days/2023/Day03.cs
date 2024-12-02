@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days2023
 {
-    public class Day03 : DayBase<char[,], int>
+    public class Day03 : IDay<char[,], int>
     {
-        public override char[,] MapInput(string input)
+        public char[,] MapInput(string input)
         {
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToArray();
             var schematic = new char[lines.Length, lines[0].Length];
@@ -21,7 +21,7 @@ namespace AdventOfCode.Days2023
             return schematic;
         }
 
-        public override int SolvePart1(char[,] schematic)
+        public int SolvePart1(char[,] schematic)
         {
             var sum = 0;
             for (var i = 0; i < schematic.GetLength(0); i++)
@@ -101,7 +101,7 @@ namespace AdventOfCode.Days2023
             return false;
         }
 
-        public override int SolvePart2(char[,] schematic)
+        public int SolvePart2(char[,] schematic)
         {
             var sum = 0;
             for (var i = 0; i < schematic.GetLength(0); i++)

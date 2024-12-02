@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day05 : DayBase<DataDay05[], int>
+	public class Day05 : IDay<DataDay05[], int>
 	{
-		public override DataDay05[] MapInput(string input)
+		public DataDay05[] MapInput(string input)
 		{
 			var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 			var data = new DataDay05[lines.Length];
@@ -19,12 +19,12 @@ namespace AdventOfCode.Days2021
 			return data;
 		}
 
-		public override int SolvePart1(DataDay05[] input)
+		public int SolvePart1(DataDay05[] input)
 		{
 			return Solve(input, false);
 		}
 
-		public override int SolvePart2(DataDay05[] input)
+		public int SolvePart2(DataDay05[] input)
 		{
 			return Solve(input, true);
 		}

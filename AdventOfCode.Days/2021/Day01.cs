@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day01 : DayBase<int[], int>
+	public class Day01 : IDay<int[], int>
 	{
-		public override int[] MapInput(string input) => input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+		public int[] MapInput(string input) => input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
-		public override int SolvePart1(int[] input) => GenericSolution(input, 1);
+		public int SolvePart1(int[] input) => GenericSolution(input, 1);
 
-		public override int SolvePart2(int[] input) => GenericSolution(input, 3);
+		public int SolvePart2(int[] input) => GenericSolution(input, 3);
 
 		private int GenericSolution(int[] input, int windowSize)
 		{

@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day07 : DayBase<Dictionary<string, Dictionary<string, int>>, int>
+	public class Day07 : IDay<Dictionary<string, Dictionary<string, int>>, int>
 	{
 		private const string shinyGoldBagName = "shiny gold";
 
-		public override Dictionary<string, Dictionary<string, int>> MapInput(string input)
+		public Dictionary<string, Dictionary<string, int>> MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries)
 				.Where(line => !line.Contains("no other bags"))
@@ -21,7 +21,7 @@ namespace AdventOfCode.Days2020
 
 		}
 
-		public override int SolvePart1(Dictionary<string, Dictionary<string, int>> bags)
+		public int SolvePart1(Dictionary<string, Dictionary<string, int>> bags)
 		{
 			var bagsThatAlreadyContainShinyGold = new List<string>();
 			var oldAnswer = 0;
@@ -53,7 +53,7 @@ namespace AdventOfCode.Days2020
 			return answer;
 		}
 
-		public override int SolvePart2(Dictionary<string, Dictionary<string, int>> bags)
+		public int SolvePart2(Dictionary<string, Dictionary<string, int>> bags)
 		{
 			return CountRequiredBagsInsideOf(shinyGoldBagName, bags);
 		}

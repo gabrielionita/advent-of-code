@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day01 : DayBase<int[], int>
+	public class Day01 : IDay<int[], int>
 	{
-		public override int[] MapInput(string input)
+		public int[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(d => int.Parse(d)).ToArray();
 		}
 
-		public override int SolvePart1(int[] data)
+		public int SolvePart1(int[] data)
 		{
 			var multiplication = 0;
 			for (var i = 0; i < data.Length - 1; i++)
@@ -27,7 +27,7 @@ namespace AdventOfCode.Days2020
 			return multiplication;
 		}
 
-		public override int SolvePart2(int[] data)
+		public int SolvePart2(int[] data)
 		{
 			var multiplication = 0;
 			for (var i = 0; i < data.Length - 2; i++)

@@ -7,7 +7,7 @@ namespace AdventOfCode.Services
 {
 	public class InputStorage : IInputStorage
 	{
-		public async Task Write(int year, int day, string content, CancellationToken cancellationToken = default)
+		public async Task Write(int year, int day, string content, CancellationToken cancellationToken)
 		{
 			var path = GetInputPath(year, day);
 

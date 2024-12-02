@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day08 : DayBase<string[][], int>
+	public class Day08 : IDay<string[][], int>
 	{
-		public override string[][] MapInput(string input)
+		public string[][] MapInput(string input)
 		{
 			return input.Split('\n').Select(c => c.Split(" ")).ToArray();
 		}
 
-		public override int SolvePart1(string[][] input)
+		public int SolvePart1(string[][] input)
 		{
 			var acceptedLengths = new int[] { 2, 3, 4, 7 };
 			var count = 0;
@@ -24,7 +24,7 @@ namespace AdventOfCode.Days2021
 			return count;
 		}
 
-		public override int SolvePart2(string[][] input)
+		public int SolvePart2(string[][] input)
 		{
 			var sum = 0;
 			foreach (var line in input)

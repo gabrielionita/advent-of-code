@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day02 : DayBase<string[], int>
+	public class Day02 : IDay<string[], int>
 	{
-		public override string[] MapInput(string input)
+		public string[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 		}
 
-		public override int SolvePart1(string[] lines)
+		public int SolvePart1(string[] lines)
 		{
 			var validPasswords = 0;
 			foreach (var line in lines)
@@ -32,7 +32,7 @@ namespace AdventOfCode.Days2020
 			return validPasswords;
 		}
 
-		public override int SolvePart2(string[] lines)
+		public int SolvePart2(string[] lines)
 		{
 			var validPasswords = 0;
 			foreach (var line in lines)

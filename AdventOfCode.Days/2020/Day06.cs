@@ -3,19 +3,19 @@ using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day06 : DayBase<string[], int>
+	public class Day06 : IDay<string[], int>
 	{
-		public override string[] MapInput(string input)
+		public string[] MapInput(string input)
 		{
 			return input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
 		}
 
-		public override int SolvePart1(string[] groups)
+		public int SolvePart1(string[] groups)
 		{
 			return groups.Sum(group => group.Replace("\n", string.Empty).Distinct().Count());
 		}
 
-		public override int SolvePart2(string[] groups)
+		public int SolvePart2(string[] groups)
 		{
 			return groups.Sum(group =>
 				group.Split("\n", StringSplitOptions.RemoveEmptyEntries)

@@ -3,19 +3,19 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day06 : DayBase<List<int>, long>
+	public class Day06 : IDay<List<int>, long>
 	{
-		public override List<int> MapInput(string input)
+		public List<int> MapInput(string input)
 		{
 			return input.Split(',').Select(int.Parse).ToList();
 		}
 
-		public override long SolvePart1(List<int> input)
+		public long SolvePart1(List<int> input)
 		{
 			return Solve(GetFrequencies(input), 80);
 		}
 
-		public override long SolvePart2(List<int> input)
+		public long SolvePart2(List<int> input)
 		{
 			return Solve(GetFrequencies(input), 256);
 		}

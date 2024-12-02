@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day10 : DayBase<int[], long>
+	public class Day10 : IDay<int[], long>
 	{
-		public override int[] MapInput(string input)
+		public int[] MapInput(string input)
 		{
 			return input.Split("\n", StringSplitOptions.RemoveEmptyEntries)
 				.Select(line => int.Parse(line)).ToArray();
 		}
 
-		public override long SolvePart1(int[] jolts)
+		public long SolvePart1(int[] jolts)
 		{
 			var difference1Jolt = 0;
 			var difference2Jolt = 0;
@@ -40,7 +40,7 @@ namespace AdventOfCode.Days2020
 			return difference1Jolt * difference3Jolt;
 		}
 
-		public override long SolvePart2(int[] jolts)
+		public long SolvePart2(int[] jolts)
 		{
 			var list = jolts.OrderBy(jolt => jolt).ToList();
 			list.Add(list[^1] + 3);

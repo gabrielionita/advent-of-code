@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day09 : DayBase<int[,], int>
+	public class Day09 : IDay<int[,], int>
 	{
-		public override int[,] MapInput(string input)
+		public int[,] MapInput(string input)
 		{
 			var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToArray();
 			var length = lines[0].Length;
@@ -46,14 +46,14 @@ namespace AdventOfCode.Days2021
 			return lowPoints;
 		}
 
-		public override int SolvePart1(int[,] input)
+		public int SolvePart1(int[,] input)
 		{
 			var lowPoints = GetLowPoints(input);
 			var flattenLowPoints = lowPoints.Cast<int>();
 			return flattenLowPoints.Sum(p => p + 1);
 		}
 
-		public override int SolvePart2(int[,] input)
+		public int SolvePart2(int[,] input)
 		{
 			var lowPoints = GetLowPoints(input);
 			var basinSizes = new List<int>(lowPoints.Cast<int>().Count(p => p > 0));

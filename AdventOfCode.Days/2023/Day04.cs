@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace AdventOfCode.Days2023
 {
-    public class Day04 : DayBase<string[], int>
+    public class Day04 : IDay<string[], int>
     {
-        public override string[] MapInput(string input)
+        public string[] MapInput(string input)
         {
             return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToArray();
         }
 
-        public override int SolvePart1(string[] cards)
+        public int SolvePart1(string[] cards)
         {
             var sum = 0;
             foreach (var card in cards)
@@ -42,7 +42,7 @@ namespace AdventOfCode.Days2023
         }
 
 
-        public override int SolvePart2(string[] cards)
+        public int SolvePart2(string[] cards)
         {
             var copiesWon = new Dictionary<int, int>();
             for (var i = 0; i < cards.Length; i++)

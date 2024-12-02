@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace AdventOfCode.Days2020
 {
-	public class Day08 : DayBase<List<Instruction>, int>
+	public class Day08 : IDay<List<Instruction>, int>
 	{
 		private const string nopInstruction = "nop";
 		private const string accInstruction = "acc";
 		private const string jmpInstruction = "jmp";
 
-		public override List<Instruction> MapInput(string input)
+		public List<Instruction> MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(line =>
 			{
@@ -19,9 +19,9 @@ namespace AdventOfCode.Days2020
 			}).ToList();
 		}
 
-		public override int SolvePart1(List<Instruction> code) => RunCode(code);
+		public int SolvePart1(List<Instruction> code) => RunCode(code);
 
-		public override int SolvePart2(List<Instruction> code)
+		public int SolvePart2(List<Instruction> code)
 		{
 			var linesChanged = new List<int>();
 			while (true)

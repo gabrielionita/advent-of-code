@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day03 : DayBase<char[][], int>
+	public class Day03 : IDay<char[][], int>
 	{
-		public override char[][] MapInput(string input)
+		public char[][] MapInput(string input)
 		{
 			return input.Split('\n', System.StringSplitOptions.RemoveEmptyEntries).Select(c => c.ToCharArray()).ToArray();
 		}
@@ -22,7 +22,7 @@ namespace AdventOfCode.Days2021
 			return result;
 		}
 
-		public override int SolvePart1(char[][] input)
+		public int SolvePart1(char[][] input)
 		{
 			var columns = input[0].Length;
 			var rows = input.Length;
@@ -45,7 +45,7 @@ namespace AdventOfCode.Days2021
 
 		}
 
-		public override int SolvePart2(char[][] input)
+		public int SolvePart2(char[][] input)
 		{
 			var inputClone = (char[][])input.Clone();
 			var columns = inputClone[0].Length;

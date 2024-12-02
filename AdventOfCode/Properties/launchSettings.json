@@ -2,8 +2,14 @@
 	"profiles": {
 		"AdventOfCode": {
 			"commandName": "Project",
-			"commandLineArgs": "--download=false --year=2023 --day=",
-			//"commandLineArgs": "--download=true --year=2023",
+			"commandLineArgs": "--download=false --year=2024 --day=",
+			"environmentVariables": {
+				"DOTNET_ENVIRONMENT": "Development"
+			}
+		},
+		"Download Input": {
+			"commandName": "Project",
+			"commandLineArgs": "--download=true --year=2024",
 			"environmentVariables": {
 				"DOTNET_ENVIRONMENT": "Development"
 			}

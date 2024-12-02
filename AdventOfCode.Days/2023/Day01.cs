@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Days2023
 {
-    public class Day01 : DayBase<string[], int>
+    public class Day01 : IDay<string[], int>
     {
         private readonly string[] numbersAsSrings = new[]
         {
@@ -17,12 +17,12 @@ namespace AdventOfCode.Days2023
              "nine"
         };
 
-        public override string[] MapInput(string input)
+        public string[] MapInput(string input)
         {
             return input.Split('\n', System.StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public override int SolvePart1(string[] input)
+        public int SolvePart1(string[] input)
         {
             var sum = 0;
             foreach(var line in input)
@@ -36,7 +36,7 @@ namespace AdventOfCode.Days2023
             return sum;
         }
 
-        public override int SolvePart2(string[] input)
+        public int SolvePart2(string[] input)
         {
             var sum = 0;
             foreach(var line in input)

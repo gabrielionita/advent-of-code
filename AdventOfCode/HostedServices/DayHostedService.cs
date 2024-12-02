@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode.HostedServices
 {
-	public class DayHostedService : BackgroundService
+    public class DayHostedService : BackgroundService
 	{
 		private readonly ILogger logger;
 		private readonly IConfiguration configuration;
@@ -49,7 +49,7 @@ namespace AdventOfCode.HostedServices
 			}
 		}
 
-		private void Execute<TInput, TSolution>(DayBase<TInput, TSolution> day, string content)
+		private void Execute<TInput, TSolution>(IDay<TInput, TSolution> day, string content)
 		{
 			foreach (var part in Enumerable.Range(1, 2))
 			{

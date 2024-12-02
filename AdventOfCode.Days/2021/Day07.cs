@@ -3,21 +3,21 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day07 : DayBase<int[], int>
+	public class Day07 : IDay<int[], int>
 	{
-		public override int[] MapInput(string input)
+		public int[] MapInput(string input)
 		{
 			return input.Split(',').Select(int.Parse).ToArray();
 		}
 
-		public override int SolvePart1(int[] input)
+		public int SolvePart1(int[] input)
 		{
 			var array = input.OrderBy(i => i).ToArray();
 			var median = array.Length % 2 == 1 ? array[array.Length / 2] : (array[(array.Length + 1) / 2] + array[(array.Length - 1) / 2]) / 2;
 			return array.Sum(i => Math.Abs(i - median));
 		}
 
-		public override int SolvePart2(int[] input)
+		public int SolvePart2(int[] input)
 		{
 			var minimumSum = int.MaxValue;
 			var maxValue = input.Max();

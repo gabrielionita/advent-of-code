@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 namespace AdventOfCode.Days2020
 {
-	public class Day11 : DayBase<char[,], int>
+	public class Day11 : IDay<char[,], int>
 	{
 		private const char EmptrySeat = 'L';
 		private const char OccupiedSeat = '#';
 		private const char Floor = '.';
 
-		public override char[,] MapInput(string input)
+		public char[,] MapInput(string input)
 		{
 			var jagged = input.Split("\n", StringSplitOptions.RemoveEmptyEntries).Select(c => c.ToArray()).ToArray();
 			var array = new char[jagged.Length, jagged[0].Length];
@@ -23,13 +23,13 @@ namespace AdventOfCode.Days2020
 			return array;
 		}
 
-		public override int SolvePart1(char[,] map)
+		public int SolvePart1(char[,] map)
 		{
 			ChangeSeats(map, 4, false);
 			return map.Cast<char>().Count(seat => seat == OccupiedSeat);
 		}
 
-		public override int SolvePart2(char[,] map)
+		public int SolvePart2(char[,] map)
 		{
 			ChangeSeats(map, 5, true);
 			return map.Cast<char>().Count(seat => seat == OccupiedSeat);

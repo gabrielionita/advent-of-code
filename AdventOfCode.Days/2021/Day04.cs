@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day04 : DayBase<DataDay04, int>
+	public class Day04 : IDay<DataDay04, int>
 	{
-		public override DataDay04 MapInput(string input)
+		public DataDay04 MapInput(string input)
 		{
 			var lines = input.Split('\n');
 			var data = new DataDay04
@@ -92,7 +92,7 @@ namespace AdventOfCode.Days2021
 			return sum * number;
 		}
 
-		public override int SolvePart1(DataDay04 input)
+		public int SolvePart1(DataDay04 input)
 		{
 			foreach (var number in input.Numbers)
 			{
@@ -110,7 +110,7 @@ namespace AdventOfCode.Days2021
 			return 0;
 		}
 
-		public override int SolvePart2(DataDay04 input)
+		public int SolvePart2(DataDay04 input)
 		{
 			var winningBoards = new List<int>();
 			foreach (var number in input.Numbers)

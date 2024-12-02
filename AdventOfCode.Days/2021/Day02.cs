@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace AdventOfCode.Days2021
 {
-	public class Day02 : DayBase<DirectionValue[], int>
+	public class Day02 : IDay<DirectionValue[], int>
 	{
-		public override DirectionValue[] MapInput(string input)
+		public DirectionValue[] MapInput(string input)
 		{
 			return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(c => new DirectionValue(c)).ToArray();
 		}
 
-		public override int SolvePart1(DirectionValue[] input)
+		public int SolvePart1(DirectionValue[] input)
 		{
 			var horizontalPosition = 0;
 			var depth = 0;
@@ -28,7 +28,7 @@ namespace AdventOfCode.Days2021
 			return horizontalPosition * depth;
 		}
 
-		public override int SolvePart2(DirectionValue[] input)
+		public int SolvePart2(DirectionValue[] input)
 		{
 			var horizontalPosition = 0;
 			var depth = 0;

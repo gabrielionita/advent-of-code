@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days2023
 {
-    public class Day02 : DayBase<Dictionary<int, Dictionary<string, int>>, long>
+    public class Day02 : IDay<Dictionary<int, Dictionary<string, int>>, long>
     {
-        public override Dictionary<int, Dictionary<string, int>> MapInput(string input)
+        public Dictionary<int, Dictionary<string, int>> MapInput(string input)
         {
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
             var result = new Dictionary<int, Dictionary<string, int>>();
@@ -40,7 +40,7 @@ namespace AdventOfCode.Days2023
             return result;
         }
 
-        public override long SolvePart1(Dictionary<int, Dictionary<string, int>> games)
+        public long SolvePart1(Dictionary<int, Dictionary<string, int>> games)
         {
             var dictionary = new Dictionary<string, int>
             {
@@ -69,7 +69,7 @@ namespace AdventOfCode.Days2023
             return sum;
         }
 
-        public override long SolvePart2(Dictionary<int, Dictionary<string, int>> games)
+        public long SolvePart2(Dictionary<int, Dictionary<string, int>> games)
         {
             var sum = 0;
             foreach(var game in games)
